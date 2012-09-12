@@ -25,12 +25,6 @@ import android.util.Pair;
  */
 public class ShpReader {
 	
-	public class PGShp
-	{
-		public Bitmap surface;
-		public List<IconHeader> headers = new Vector<IconHeader>();
-	    public List<Integer> offsets = new Vector<Integer>();
-	}
 	/**
 	 * Default palette. Used if icon is not associated with a palette.
   	 */
@@ -209,7 +203,7 @@ public class ShpReader {
 	Load a SHP file to a PG_Shp struct.
 	 * @throws IOException if there is any error while reading
 	*/
-	PGShp Load(InputStream file ) throws IOException
+	public static PGShp Load(InputStream file ) throws IOException
 	{
 		file.mark(-1);
 	    PGShp result = new PGShp(); 
@@ -225,7 +219,7 @@ public class ShpReader {
 	    byte[] rawBuffer =  new byte[4];
 	    file.read(rawBuffer);
 	    ByteBuffer buffer = ByteBuffer.wrap(rawBuffer);
-	    
+	    buffer.order(ByteOrder.LITTLE_ENDIAN);
 	    int count = buffer.getInt();
 	    
 	    if ( count == 0 ) {
@@ -233,7 +227,9 @@ public class ShpReader {
 	        return null;
 	    }
 	    rawBuffer = new byte[(4+4) * count]; // two int, header and data position
+	    file.read(rawBuffer);
 	    buffer = ByteBuffer.wrap(rawBuffer);
+	    buffer.order(ByteOrder.LITTLE_ENDIAN);
 	    
 	    Vector<Pair<Integer,Integer>> headerAndPalettePositions = new Vector<Pair<Integer,Integer>>();
 	    /* create surface (measure size first) */
@@ -272,7 +268,7 @@ public class ShpReader {
 	    }
 	    
 	    result.surface = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-	    result.surface.eraseColor(Color.TRANSPARENT);
+	    result.surface.eraseColor(Color.BLACK);
 	    		
 	    /* read icons */
 	    for(int i = 0; i < count;i++)
@@ -300,7 +296,6 @@ public class ShpReader {
 	        if ( header.valid )
 	        {
 	        	ReadIcon(file,result.surface, result.offsets.get(i), actual_pal,result.headers.get(i));
-	            
 	        }
 	    }
 	    return result;

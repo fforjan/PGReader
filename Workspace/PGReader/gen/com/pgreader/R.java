@@ -27,7 +27,6 @@ public final class R {
         public static final int targetType=0x7f07000b;
         public static final int unit_detail=0x7f070003;
         public static final int unit_detail_container=0x7f070000;
-        public static final int unit_image=0x7f07000e;
         public static final int unit_list=0x7f070001;
     }
     public static final class layout {
@@ -38,6 +37,7 @@ public final class R {
     }
     public static final class raw {
         public static final int panzequp=0x7f040000;
+        public static final int tacicons=0x7f040001;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
