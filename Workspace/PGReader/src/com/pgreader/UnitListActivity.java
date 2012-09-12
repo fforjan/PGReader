@@ -1,5 +1,7 @@
 package com.pgreader;
 
+import com.panzergeneral.DataRepository;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -13,6 +15,9 @@ public class UnitListActivity extends FragmentActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        DataRepository.Load(getResources());
+        
         setContentView(R.layout.activity_unit_list);
 
         if (findViewById(R.id.unit_detail_container) != null) {

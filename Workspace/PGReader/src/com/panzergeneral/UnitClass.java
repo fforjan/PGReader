@@ -24,6 +24,12 @@ public enum UnitClass {
 	private static final UnitClass[] Values = UnitClass.values();
 	
 	public static UnitClass From(int index) {
+		if(index >= Values.length)
+		{
+			// if something is weird, back to the initial class
+			index = 0;
+		}
+		
 		return Values[index];
 	}
 }

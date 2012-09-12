@@ -1,7 +1,7 @@
 package com.pgreader;
 
+import com.panzergeneral.DataRepository;
 import com.panzergeneral.UnitEntry;
-import com.pgreader.dummy.DummyContent;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,7 +23,7 @@ public class UnitDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            mItem = DummyContent.ItemsMap.get(getArguments().getString(ARG_ITEM_ID));
+            mItem = DataRepository.ItemsMap.get(getArguments().getString(ARG_ITEM_ID));
         }
     }
 

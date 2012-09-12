@@ -1,5 +1,7 @@
 package com.pgreader;
 
+import com.panzergeneral.DataRepository;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +13,9 @@ public class UnitDetailActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        DataRepository.Load(getResources());
+        
         setContentView(R.layout.activity_unit_detail);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
