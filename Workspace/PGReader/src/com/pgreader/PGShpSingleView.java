@@ -13,7 +13,7 @@ import android.view.View;
 
 
 
-public class UnitView extends View {
+public class PGShpSingleView extends View {
 	
 	PGShp shpIcons = null;
 	
@@ -24,7 +24,7 @@ public class UnitView extends View {
 		this.invalidate();
 	}
 
-	public UnitView(Context context, PGShp icons) {
+	public PGShpSingleView(Context context, PGShp icons) {
 		super(context);
 		shpIcons = icons;
 		iconIndex = -1;

@@ -22,7 +22,7 @@ public class UnitDetailFragment extends Fragment {
     
 
     UnitEntry mItem;
-    UnitView unitView;
+    PGShpSingleView unitView;
 
     public UnitDetailFragment() {
     }
@@ -55,7 +55,7 @@ public class UnitDetailFragment extends Fragment {
         if(unitView == null)
         {
         	android.widget.LinearLayout layout = ((android.widget.LinearLayout) rootView.findViewById(R.id.MainUnitLayout));
-        	unitView = new UnitView(layout.getContext(), tacIcons);
+        	unitView = new PGShpSingleView(layout.getContext(), tacIcons);
         	TextView content = new TextView(layout.getContext());
         	layout.addView(unitView, 100, 100);
         	content.setText("Hello World");
