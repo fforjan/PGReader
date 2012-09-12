@@ -268,7 +268,7 @@ public class ShpReader {
 	    }
 	    
 	    result.surface = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-	    result.surface.eraseColor(Color.BLACK);
+	    result.surface.eraseColor(Color.TRANSPARENT);
 	    		
 	    /* read icons */
 	    for(int i = 0; i < count;i++)
