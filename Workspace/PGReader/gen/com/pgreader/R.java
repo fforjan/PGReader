@@ -22,10 +22,12 @@ public final class R {
         public static final int defAir=0x7f070005;
         public static final int defClose=0x7f070009;
         public static final int defGround=0x7f070007;
+        public static final int moveType=0x7f07000c;
+        public static final int nation=0x7f07000d;
         public static final int targetType=0x7f07000b;
         public static final int unit_detail=0x7f070003;
         public static final int unit_detail_container=0x7f070000;
-        public static final int unit_image=0x7f07000c;
+        public static final int unit_image=0x7f07000e;
         public static final int unit_list=0x7f070001;
     }
     public static final class layout {
@@ -46,6 +48,8 @@ public final class R {
         public static final int defenseAir=0x7f050004;
         public static final int defenseClose=0x7f050008;
         public static final int defenseGround=0x7f050006;
+        public static final int moveType=0x7f05000c;
+        public static final int nation=0x7f05000d;
         public static final int targetType=0x7f05000a;
         public static final int title_unit_detail=0x7f050001;
         public static final int title_unit_list=0x7f050002;

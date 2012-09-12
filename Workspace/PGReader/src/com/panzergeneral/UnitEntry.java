@@ -15,11 +15,11 @@ public class UnitEntry {
 	  public  int  def_air;    
 	  public  int  def_close;  
 	  public  TargetType TargetType;
-	  public  int  aaf;        /* air attack flag */
+	  public  boolean  aaf;        /* air attack flag */
 	  public  int  init;        
 	  public  int  range;      
 	  public  int  spot;       
-	  public  int  agf;        /* air ground flag */
+	  public  boolean  agf;        /* air ground flag */
 	  public  MoveType MoveType;  
 	  public  int  move;       
 	  public  int  fuel;       
@@ -29,7 +29,7 @@ public class UnitEntry {
 	  public  int  month;      
 	  public  int  year;       
 	  public  int  last_year; 
-	  public  int  nation;
+	  public  Nation  nation;
 	  
 	  @Override 
 	  public String toString() {
@@ -40,37 +40,6 @@ public class UnitEntry {
 		/*
 		Load PG unit entry from file position.
 		DOS entry format (50 bytes):
-		 NAME   0
-		 CLASS 20
-		 SA    21
-		 HA    22
-		 AA    23
-		 NA    24
-		 GD    25
-		 AD    26
-		 CD    27
-		 TT    28
-		 AAF   29
-		 ???   30
-		 INI   31
-		 RNG   32
-		 SPT   33
-		 GAF   34    
-		 MOV_TYPE 35
-		 MOV   36
-		 FUEL  37
-		 AMMO  38
-		 ???   39
-		 ???   40
-		 COST  41    
-		 BMP   42
-		 ???   43
-		 ANI   44
-		 ???   45
-		 MON   46
-		 YR    47
-		 LAST_YEAR 48 
-		 ???   49
 		*/
 		public static UnitEntry ReadEntry(InputStream stream) throws IOException {
 			UnitEntry read = new UnitEntry();
@@ -78,7 +47,8 @@ public class UnitEntry {
 			//Name 0
 			byte[] name = new byte[20];
 			stream.read(name);
-			read.Name = new String(name);
+			read.Name = new String(name).trim();
+			read.nation = GuessNationFromName(read.Name);
 			
 			//CLASS 20
 			read.Class = UnitClass.From(stream.read());
@@ -108,7 +78,7 @@ public class UnitEntry {
 			read.TargetType = com.panzergeneral.TargetType.From(stream.read());
 			
 			// AAF   29
-			read.aaf = stream.read();
+			read.aaf = stream.read() != 0;
 			
 			// ???   30
 			stream.skip(1);
@@ -123,7 +93,7 @@ public class UnitEntry {
 			read.spot = stream.read();
 			
 			// GAF   34
-			read.agf = stream.read();
+			read.agf = stream.read() != 0;
 			
 			// MOV_TYPE 35
 			read.MoveType =  com.panzergeneral.MoveType.From(stream.read());
@@ -164,6 +134,82 @@ public class UnitEntry {
 			// ???   49
 			stream.skip(1);
 			
-			return read;
+			 ApplyModification(read);
+		
+			 return read;
+		}
+		
+		/** Try to figure out nation from unit entry name. No field in PG
+		 * unit entry seems to hold the nation index. Bytes 30, 39, 40, 43
+		 * and 45 are just the same for all entries. 44 (what means ANI???)
+		 * seems to group certain units somehow according to class but it is
+		 * very jumpy and certainly not the nation id. Byte 49 varies
+		 * less but seems to have some other meaning, too. Pictures are also
+		 * not very sorted, so trying the unit name seems to be the easiest
+		 * approach for now:
+		 * Captions of non-german units start with 2-3 capital letters
+		 * indicating either the nation (GB, US, IT, ...) or allied usage 
+		 * (AF,AD,...). Check for the "big" nation ids and map to
+		 * nation number. Generic allied units will be used by different 
+		 * nations in scenarios but are not available for purchase (as it 
+		 * seems that they equal some unit of the major nations).
+		 * Return index in global nations or -1 if no match. */
+		private static Nation GuessNationFromName(String unitName)
+		{
+			if(unitName.startsWith("PO")) return Nation.Poland;
+			if(unitName.startsWith("GB ")) return Nation.GreatBritain;
+			if(unitName.startsWith("FR ")) return Nation.France;
+			if(unitName.startsWith("NOR ")) return Nation.Norway;
+			if(unitName.startsWith("LC ")) return Nation.Belgia; /* assign low country units to belgia */
+			if(unitName.startsWith("ST ")) return Nation.Sovjetunion;
+			if(unitName.startsWith("IT ")) return Nation.Italy;
+			if(unitName.startsWith("Bulgarian ")) return Nation.Bulgaria;
+			if(unitName.startsWith("Hungarian ")) return Nation.Hungary;
+			if(unitName.startsWith("Rumanian ")) return Nation.Rumania;
+			if(unitName.startsWith("Greek ")) return Nation.Greece;
+			if(unitName.startsWith("Yugoslav ")) return Nation.Yugoslavia;
+			if(unitName.startsWith("US ")) return Nation.USA;
+			if(unitName.startsWith("Finn")) return Nation.Finnland; /* codes for Finnland ... */
+			if(unitName.startsWith("FIN")) return Nation.Finnland; /* ... not used in pg but some other campaigns */
+			if(unitName.startsWith("FFR ")) return Nation.France;
+			if(unitName.startsWith("FPO ")) return Nation.Poland;
+			if(unitName.startsWith("Katyusha ")) return Nation.Sovjetunion;
+			
+			//by default its Germany
+			// TODO if(unitName.startsWith("AF ", -1 },
+			// TODO if(unitName.startsWith("AD ", -1 },
+			
+			return  Nation.Germany;
+		
+		}
+		
+		private static void ApplyModification(UnitEntry unit)
+		{
+			/* adjust attack values according to unit class (add - for defense only) */
+	        switch ( unit.Class ) {
+	            case INFANTRY:
+	            case TANK:
+	            case RECON:
+	            case ANTI_TANK:
+	            case ARTILLERY:
+		        case FORT:
+	            case SUBMARINE:
+	            case DESTROYER:
+	            case CAPITAL:
+		        case CARRIER:  
+	                unit.atk_air = -unit.atk_air;
+	                break;
+	            case AIR_DEFENSE:
+	            	unit.atk_soft = -unit.atk_soft;
+	            	unit.atk_hard = -unit.atk_hard;
+	            	unit.atk_naval = -unit.atk_naval;
+	                break;
+	            case TACBOMBER:
+	            case LEVBOMBER:
+	                if ( unit.aaf )
+	                	unit.atk_air = -unit.atk_air;
+	                break;
+	        }
+			
 		}
 }

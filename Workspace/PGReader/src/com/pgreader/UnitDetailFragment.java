@@ -51,7 +51,15 @@ public class UnitDetailFragment extends Fragment {
             ((TextView) rootView.findViewById(R.id.defGround))
             	.setText(String.valueOf(mItem.def_ground));
             ((TextView) rootView.findViewById(R.id.targetType))
-            	.setText(String.valueOf(mItem.TargetType));    
+            	.setText(String.valueOf(mItem.TargetType));  
+            
+
+            ((TextView) rootView.findViewById(R.id.nation))
+        	.setText(String.valueOf(mItem.nation));
+            ((TextView) rootView.findViewById(R.id.moveType))
+        	.setText(String.valueOf(mItem.MoveType));  
+
+            
         }
         return rootView;
     }
