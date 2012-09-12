@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="app_name">PGReader</string>
+    <string name="title_unit_detail">Unit Detail</string>
+    <string name="title_unit_list">Units</string>
+    <string name="attackAir">Attack Air</string>
+    <string name="defenseAir">Defense Air</string>
+    <string name="attackHard">Attack Hard</string>
+    <string name="defenseGround">Defense Ground</string>
+    <string name="attackNaval">Attack Naval</string>
+    <string name="defenseClose">Defense Close</string>
+    <string name="attackSoft">Attack Soft</string>
+    <string name="targetType">Target Type</string>
+    <string name="unitImage">unit image</string>
+
+</resources>
