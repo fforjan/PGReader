@@ -7,6 +7,7 @@ import com.panzergeneral.DataRepository;
 import com.panzergeneral.UnitEntry;
 import com.panzergeneral.shp.PGShp;
 import com.panzergeneral.shp.ShpReader;
+import com.pgreader.view.PGShpSingleView;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,24 +16,68 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+/**
+ * fragment displaying the unit detail.
+ */
 public class UnitDetailFragment extends Fragment {
 
-    public static final String ARG_ITEM_ID = "item_id";
-    public static PGShp tacIcons;
+	/**
+	 * default size for the PGShpSingleView for unit icon.
+	 */
+	private static final int ICONDEFAULTSIZE = 100;
+	
+	/** 
+	 * Argument name when invoking the fragment defining current unit id.
+	 */
+    public static final String ARG_UNITID = "unitId";
+    
+    /**
+     * the unit icons information from the SHP file.
+     */
+    private static PGShp sTacIcons;
     
 
-    UnitEntry mItem;
-    PGShpSingleView unitView;
-
-    public UnitDetailFragment() {
+    /**
+     * current unit displayed.
+     * This is set using the ARG_UNITID
+     */
+    private UnitEntry mItem;
+    
+    /**
+     * our view for the unit icon.
+     */
+    private PGShpSingleView mUnitView;
+    
+    /**
+     * if method return the current rootView.
+     * If this object is existing, it will be created.
+     * @param rootView view containing the main layout
+     * @return the new view
+     */
+    private PGShpSingleView getUnitView(View rootView) {
+    	if (sTacIcons == null) {
+        	InputStream tacIconsStream = getResources().openRawResource(R.raw.tacicons);  
+        	try {
+				sTacIcons = ShpReader.load(tacIconsStream);
+        	} catch (IOException e) {
+        		System.err.println("Cannot load tacicons");
+        	}
+        }
+        if (mUnitView == null) {
+        	android.widget.LinearLayout layout =
+        			((android.widget.LinearLayout) rootView.findViewById(R.id.MainUnitLayout));
+        	mUnitView = new PGShpSingleView(layout.getContext(), sTacIcons);
+        	layout.addView(mUnitView, ICONDEFAULTSIZE, ICONDEFAULTSIZE);	
+        }
+        return mUnitView;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            mItem = DataRepository.ItemsMap.get(getArguments().getString(ARG_ITEM_ID));
+        if (getArguments().containsKey(ARG_UNITID)) {
+            mItem = DataRepository.ItemsMap.get(getArguments().getString(ARG_UNITID));
         }
         
         
@@ -43,56 +88,46 @@ public class UnitDetailFragment extends Fragment {
             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_unit_detail, container, false);
         
-        if(tacIcons == null)
-        {
-        	InputStream tacIconsStream = getResources().openRawResource(R.raw.tacicons);  
-        	try {
-				tacIcons = ShpReader.Load(tacIconsStream);
-        	} catch (IOException e) {
-        		System.err.println("Cannot load tacicons");
-        	}
-        }
-        if(unitView == null)
-        {
-        	android.widget.LinearLayout layout = ((android.widget.LinearLayout) rootView.findViewById(R.id.MainUnitLayout));
-        	unitView = new PGShpSingleView(layout.getContext(), tacIcons);
-        	TextView content = new TextView(layout.getContext());
-        	layout.addView(unitView, 100, 100);
-        	content.setText("Hello World");
-        	layout.addView(content);	
-        }
-        
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.unit_detail)).setText(
-                	String.format("%s [%s]", mItem.Name, mItem.Class));
+            getTextView(rootView, R.id.unit_detail)
+            	.setText(String.format("%s [%s]", mItem.Name, mItem.Class));
 
-            ((TextView) rootView.findViewById(R.id.attackAir))
+            getTextView(rootView, R.id.attackAir)
             	.setText(String.valueOf(mItem.atk_air));
-            ((TextView) rootView.findViewById(R.id.attackHard))
+            getTextView(rootView, R.id.attackHard)
             	.setText(String.valueOf(mItem.atk_hard));
-            ((TextView) rootView.findViewById(R.id.attackNaval))
+            getTextView(rootView, R.id.attackNaval)
             	.setText(String.valueOf(mItem.atk_naval));
-            ((TextView) rootView.findViewById(R.id.attackSoft))
+            getTextView(rootView, R.id.attackSoft)
             	.setText(String.valueOf(mItem.atk_soft));
 
-            ((TextView) rootView.findViewById(R.id.defAir))
+            getTextView(rootView, R.id.defAir)
             	.setText(String.valueOf(mItem.def_air));
-            ((TextView) rootView.findViewById(R.id.defClose))
+            getTextView(rootView, R.id.defClose)
             	.setText(String.valueOf(mItem.def_close));
-            ((TextView) rootView.findViewById(R.id.defGround))
+            getTextView(rootView, R.id.defGround)
             	.setText(String.valueOf(mItem.def_ground));
-            ((TextView) rootView.findViewById(R.id.targetType))
+            getTextView(rootView, R.id.targetType)
             	.setText(String.valueOf(mItem.TargetType));  
             
 
-            ((TextView) rootView.findViewById(R.id.nation))
+            getTextView(rootView, R.id.nation)
         	.setText(String.valueOf(mItem.nation));
-            ((TextView) rootView.findViewById(R.id.moveType))
+            getTextView(rootView, R.id.moveType)
         	.setText(String.valueOf(mItem.MoveType));  
 
-            unitView.setIconIndex(mItem.pic_id);
+            getUnitView(rootView).setIconIndex(mItem.pic_id);
             
         }
         return rootView;
     }
+
+	/**
+	 * @param rootView the root view
+	 * @param id view id
+	 * @return the text view using the id
+	 */
+	private TextView getTextView(View rootView, int id) {
+		return (TextView) rootView.findViewById(id);
+	}
 }

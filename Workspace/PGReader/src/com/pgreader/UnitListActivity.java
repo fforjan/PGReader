@@ -7,9 +7,15 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 
+/**
+ * Unit list activity.
+ */
 public class UnitListActivity extends FragmentActivity
         implements UnitListFragment.Callbacks {
 
+	/**
+	 * true if we are in a two mode pane else false.
+	 */
     private boolean mTwoPane;
 
     @Override
@@ -28,10 +34,15 @@ public class UnitListActivity extends FragmentActivity
         }
     }
 
+    /**
+     * call the selected item is changed.
+     * @see UnitListFragment.Callbacks interface
+     * @param id id of the selected it
+     */
     public void onItemSelected(String id) {
         if (mTwoPane) {
             Bundle arguments = new Bundle();
-            arguments.putString(UnitDetailFragment.ARG_ITEM_ID, id);
+            arguments.putString(UnitDetailFragment.ARG_UNITID, id);
             UnitDetailFragment fragment = new UnitDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
@@ -40,7 +51,7 @@ public class UnitListActivity extends FragmentActivity
 
         } else {
             Intent detailIntent = new Intent(this, UnitDetailActivity.class);
-            detailIntent.putExtra(UnitDetailFragment.ARG_ITEM_ID, id);
+            detailIntent.putExtra(UnitDetailFragment.ARG_UNITID, id);
             startActivity(detailIntent);
         }
     }

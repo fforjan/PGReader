@@ -11,25 +11,44 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+/**
+ * Display the list of unit.
+ */
 public class UnitListFragment extends ListFragment {
 
+	/**
+	 * persist id for the mActivatedPosition field.
+	 */
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
+    /**
+     * current callback.
+     */
     private Callbacks mCallbacks = sDummyCallbacks;
+    
+    /**
+     * Position of the current selection is persisted through this member.
+     */
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
+    /**
+     * define the call backs interface.
+     */
     public interface Callbacks {
+    	/**
+    	 * called when a new item is selected.
+    	 * @param id id of the selected item, null if there is no selection.
+    	 */
         void onItemSelected(String id);
     }
 
+    /**
+     * Dummy call back when resetting the callback.
+     */
     private static Callbacks sDummyCallbacks = new Callbacks() {
-
 		public void onItemSelected(String id) {
 		}
     };
-
-    public UnitListFragment() {
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,12 +98,20 @@ public class UnitListFragment extends ListFragment {
         }
     }
 
-    public void setActivateOnItemClick(boolean activateOnItemClick) {
+    /**
+     * configure to active on click or not.
+     * @param activateOnItemClick if true, a click will select activate an object
+     */
+    public void setActivateOnItemClick(boolean activateOnItemClick) { 
         getListView().setChoiceMode(activateOnItemClick
                 ? ListView.CHOICE_MODE_SINGLE
                 : ListView.CHOICE_MODE_NONE);
     }
 
+    /**
+     * update the current item.
+     * @param position item position. 
+     */
     public void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
             getListView().setItemChecked(mActivatedPosition, false);

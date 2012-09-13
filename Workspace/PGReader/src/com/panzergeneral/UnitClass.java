@@ -1,4 +1,4 @@
-package com.panzergeneral;
+package com.panzergeneral; 
 
 public enum UnitClass {
 	INFANTRY,
@@ -24,8 +24,7 @@ public enum UnitClass {
 	private static final UnitClass[] Values = UnitClass.values();
 	
 	public static UnitClass From(int index) {
-		if(index >= Values.length)
-		{
+		if (index >= Values.length) {
 			// if something is weird, back to the initial class
 			index = 0;
 		}

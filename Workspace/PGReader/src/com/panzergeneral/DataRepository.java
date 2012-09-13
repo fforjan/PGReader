@@ -9,54 +9,54 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.pgreader.BuildConfig;
 import com.pgreader.R;
 
 import android.content.res.Resources;
 
-public class DataRepository {
+public final class DataRepository {
 
-	 public static List<UnitEntry> Items = new ArrayList<UnitEntry>();
-	 public static Map<String, UnitEntry> ItemsMap = new HashMap<String, UnitEntry>();
+	private DataRepository() { } 
 
-	 public static void DummyInit() {
+	public static List<UnitEntry> Items = new ArrayList<UnitEntry>();
+	public static Map<String, UnitEntry> ItemsMap = new HashMap<String, UnitEntry>();
 
-		 UnitEntry tmp = new UnitEntry();
-		 tmp.Name = "Unit 1";
-		 tmp.Class = UnitClass.INFANTRY;
-		 tmp.TargetType = TargetType.Soft;
-		 tmp.MoveType = MoveType.Leg;
-		 addItem(tmp);
+	public static void DummyInit() {
 
-		 tmp = new UnitEntry();
-		 tmp.Name = "Unit 2";
-		 tmp.Class = UnitClass.FIGHTER;
-		 tmp.TargetType = TargetType.Air;
-		 tmp.MoveType = MoveType.Air;
-		 addItem(tmp);
+		UnitEntry tmp = new UnitEntry();
+		tmp.Name = "Unit 1";
+		tmp.Class = UnitClass.INFANTRY;
+		tmp.TargetType = TargetType.Soft;
+		tmp.MoveType = MoveType.Leg;
+		addItem(tmp);
 
-		 tmp = new UnitEntry();
-		 tmp.Name = "Unit 3";
-		 tmp.Class = UnitClass.TANK;
-		 tmp.TargetType = TargetType.Hard;
-		 tmp.MoveType = MoveType.Tracked;
-		 addItem(tmp);
-	 }
+		tmp = new UnitEntry();
+		tmp.Name = "Unit 2";
+		tmp.Class = UnitClass.FIGHTER;
+		tmp.TargetType = TargetType.Air;
+		tmp.MoveType = MoveType.Air;
+		addItem(tmp);
 
-	 private static void addItem(UnitEntry item) {
-		 Items.add(item);
-		 ItemsMap.put(item.Name, item);
-	 }
-	
+		tmp = new UnitEntry();
+		tmp.Name = "Unit 3";
+		tmp.Class = UnitClass.TANK;
+		tmp.TargetType = TargetType.Hard;
+		tmp.MoveType = MoveType.Tracked;
+		addItem(tmp);
+	}
+
+	private static void addItem(UnitEntry item) {
+		Items.add(item);
+		ItemsMap.put(item.Name, item);
+	}
+
 	public static void Load(Resources resources) {
-		if(Items.isEmpty())
-		{
+		if (Items.isEmpty()) {
 			try {
 				InputStream stream = resources.openRawResource(R.raw.panzequp);
 
 				byte[] buffer = new byte[2];
 				stream.read(buffer);
-				
+
 				ByteBuffer countBuffer = ByteBuffer.wrap(buffer);
 				countBuffer.order(ByteOrder.LITTLE_ENDIAN);
 				/* DOS format:
@@ -68,10 +68,10 @@ public class DataRepository {
 
 				//first entry is reserved
 				count--;
-				stream.skip(50);
-				
+				stream.skip(UnitEntry.UNITENTRYSIZE);
+
 				while (count-- > 0) {
-					addItem(UnitEntry.ReadEntry(stream));
+					addItem(UnitEntry.readEntry(stream));
 				}
 			} catch (Resources.NotFoundException ex) {
 				DummyInit();

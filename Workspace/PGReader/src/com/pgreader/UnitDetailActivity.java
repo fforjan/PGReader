@@ -8,6 +8,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
+/**
+ * the activity for displaying unit detail.
+ * @author FREDERIC FORJAN <GeoVah>
+ */
 public class UnitDetailActivity extends FragmentActivity {
 
     @Override
@@ -22,8 +26,8 @@ public class UnitDetailActivity extends FragmentActivity {
 
         if (savedInstanceState == null) {
             Bundle arguments = new Bundle();
-            arguments.putString(UnitDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(UnitDetailFragment.ARG_ITEM_ID));
+            arguments.putString(UnitDetailFragment.ARG_UNITID,
+                    getIntent().getStringExtra(UnitDetailFragment.ARG_UNITID));
             UnitDetailFragment fragment = new UnitDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()

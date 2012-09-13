@@ -1,18 +1,40 @@
 package com.panzergeneral;
 
+/** 
+ * enum for target type.
+ */
 public enum TargetType {
+	/**
+	 * soft target.
+	 */
 	Soft,
+	/** 
+	 * hard target.
+	 */
 	Hard,
+	/**
+	 * air target.
+	 */
 	Air,
+	/** 
+	 * naval target.
+	 */
 	Naval;
 	
-	private static final TargetType[] Values = TargetType.values();
+	/**
+	 * array of values.
+	 */
+	private static final TargetType[] VALUES = TargetType.values();
 	
-	public static TargetType From(int index) {
-		if(index > Values.length)
-		{
+	/**
+	 * retrieve a TargetType from its index.
+	 * @param index index value
+	 * @return the target type
+	 */
+	public static TargetType from(int index) {
+		if (index > VALUES.length || index < 0) {
 			index = 0;
 		}
-		return Values[index];
+		return VALUES[index];
 	}
 }
