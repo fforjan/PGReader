@@ -70,7 +70,7 @@ public class IconsResourceSingleView extends View {
 	protected void onDraw(Canvas canvas) {
 		final int iPadding = 5;
 		
-		if (mIconIndex > 0) {
+		if (mIconIndex > 0 && mShpIcons != null) {
 			IconHeader currentIcon = mShpIcons.getHeaders().get(mIconIndex);
 			
 			Rect source = new Rect(currentIcon.getIconBound());

@@ -1,21 +1,16 @@
 package com.pgreader.ui;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import com.pgreader.R;
-import com.pgreader.data.DataRepository;
-import com.pgreader.data.IconResources;
-import com.pgreader.data.UnitEntry;
-import com.pgreader.legacy.ShpReader;
-import com.pgreader.ui.view.IconsResourceSingleView;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.pgreader.R;
+import com.pgreader.data.DataRepository;
+import com.pgreader.data.UnitEntry;
+import com.pgreader.ui.view.IconsResourceSingleView;
 
 /**
  * fragment displaying the unit detail.
@@ -32,12 +27,6 @@ public class UnitDetailFragment extends Fragment {
 	 */
     public static final String ARG_UNITID = "unitId";
     
-    /**
-     * the unit icons information from the SHP file.
-     */
-    private static IconResources sTacIcons;
-    
-
     /**
      * current unit displayed.
      * This is set using the ARG_UNITID
@@ -56,18 +45,12 @@ public class UnitDetailFragment extends Fragment {
      * @return the new view
      */
     private IconsResourceSingleView getUnitView(View rootView) {
-    	if (sTacIcons == null) {
-        	InputStream tacIconsStream = getResources().openRawResource(R.raw.tacicons);  
-        	try {
-				sTacIcons = ShpReader.load(tacIconsStream);
-        	} catch (IOException e) {
-        		System.err.println("Cannot load tacicons");
-        	}
-        }
+    		        
         if (mUnitView == null) {
         	android.widget.LinearLayout layout =
         			((android.widget.LinearLayout) rootView.findViewById(R.id.MainUnitLayout));
-        	mUnitView = new IconsResourceSingleView(layout.getContext(), sTacIcons);
+        	mUnitView = new IconsResourceSingleView(layout.getContext(), 
+        			DataRepository.getsTacIcons());
         	layout.addView(mUnitView, ICONDEFAULTSIZE, ICONDEFAULTSIZE);	
         }
         return mUnitView;

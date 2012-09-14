@@ -1,5 +1,4 @@
 <resources>
-
     <string name="app_name">PGReader</string>
     <string name="title_unit_detail">Unit Detail</string>
     <string name="title_unit_list">Units</string>
@@ -20,5 +19,7 @@
     <string name="manageResources">Manage Resources</string>
     <string name="unitBrowser">Unit Browser</string>
     <string name="title_activity_resource_loader">Load resources</string>
+    <string name="pg_data_corrupted">The Panzer General data are &lt;b&gt;corrupted&lt;/b&gt;, Resources cannot be loaded</string>
+    <string name="closeDialog">Close</string>
 
 </resources>

@@ -134,7 +134,17 @@ public final class UnitReader {
 	}
 
 	/**
-	 * load our equipment data from our resource bundle.
+	 * load units icons.
+	 * @param resources resource
+	 * @throws IOException if any error occurs while reading
+	 */
+	public static void loadIcons(Resources resources) throws IOException {
+		InputStream tacIconsStream = resources.openRawResource(R.raw.tacicons);  
+    	DataRepository.setsTacIcons(ShpReader.load(tacIconsStream));
+	}
+	
+	/**
+	 * load our units data from our resource bundle.
 	 * @param resources resource
 	 * @throws IOException if any error occurs while reading
 	 */

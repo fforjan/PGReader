@@ -20,6 +20,11 @@ public final class DataRepository {
 	 */
 	private static List<UnitEntry> sUnits = new ArrayList<UnitEntry>();
 	
+    /**
+     * the unit icons information from the SHP file.
+     */
+    private static IconResources sTacIcons;
+	
 	/**
 	 * map for accessing the unit from its id.
 	 */
@@ -46,5 +51,19 @@ public final class DataRepository {
 	 */
 	public static List<UnitEntry> getsUnits() {
 		return sUnits;
+	}
+
+	/**
+	 * @return the sTacIcons
+	 */
+	public static IconResources getsTacIcons() {
+		return sTacIcons;
+	}
+
+	/**
+	 * @param tacIcons the sTacIcons to set
+	 */
+	public static void setsTacIcons(IconResources tacIcons) {
+		DataRepository.sTacIcons = tacIcons;
 	}
 }
