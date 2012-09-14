@@ -173,7 +173,7 @@ public final class UnitReader {
 		stream.skip(UNITENTRYSIZE);
 
 		while (++current < count) {
-			callback.setSecondaryStatus(((float) count) / current);
+			callback.setSecondaryStatus(((float) current) / count);
 			DataRepository.addItem(readEntry(stream));
 		}
 

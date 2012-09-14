@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.pgreader.R;
 import com.pgreader.data.DataRepository;
+import com.pgreader.data.SoundManager;
 import com.pgreader.data.UnitEntry;
 import com.pgreader.ui.view.IconsResourceSingleView;
 
@@ -46,8 +47,6 @@ public class UnitDetailFragment extends Fragment {
         if (getArguments().containsKey(ARG_UNITID)) {
             mItem = DataRepository.getsUnitsMap().get(getArguments().getString(ARG_UNITID));
         }
-        
-        
     }
 
     @Override
@@ -56,9 +55,8 @@ public class UnitDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_unit_detail, container, false);
         
         if (mItem != null) {
-        	getIconView(rootView, R.id.unitIcon).setIconResources(DataRepository.getsTacIcons()); 
-        	getIconView(rootView, R.id.unitFlag).setIconResources(DataRepository.getFlags()); 
-            
+        	initIconViews(rootView);
+        	
         	getTextView(rootView, R.id.unit_detail)
             	.setText(String.format("%s [%s]", mItem.getName(), mItem.getUnitClass()));
 
@@ -92,6 +90,21 @@ public class UnitDetailFragment extends Fragment {
         }
         return rootView;
     }
+
+	/**
+	 * @param rootView the root view
+	 */
+	private void initIconViews(View rootView) {
+		getIconView(rootView, R.id.unitIcon).setIconResources(DataRepository.getsTacIcons()); 
+		getIconView(rootView, R.id.unitFlag).setIconResources(DataRepository.getFlags()); 
+		
+		
+		getIconView(rootView, R.id.unitIcon).setOnClickListener(new View.OnClickListener() {
+		    public void onClick(View v) {
+		    	SoundManager.playSound(mItem.getMoveType(), v.getContext());
+		    }
+		});
+	}
 
 	/**
 	 * @param rootView the root view

@@ -5,6 +5,8 @@ import java.io.InputStream;
 
 import com.pgreader.R;
 import com.pgreader.data.DataRepository;
+import com.pgreader.data.MoveType;
+import com.pgreader.data.SoundManager;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -59,6 +61,12 @@ public final class LegacyReader {
 	    private ProgressDialog mProgressDialog;
 	    
 	    /**
+	     * define the beginning of the progress bar
+	     * this is used to update the second part.
+	     */
+	    private float mCurrentStepStarts;
+	    
+	    /**
 	     * context to be use within the task.
 	     */
 	    private Context mContext;
@@ -73,9 +81,17 @@ public final class LegacyReader {
 	    
 	    @Override
 	    protected void onPreExecute() {
-	    	mProgressDialog = ProgressDialog.show(mContext, mContext.getString(R.string.pleaseWait),
-					mContext.getString(R.string.loadingData), false, false);
+	    	mProgressDialog = new ProgressDialog(mContext);
+	    	
+	    	mProgressDialog.setTitle(R.string.pleaseWait);
+	    	mProgressDialog.setMessage(mContext.getString(R.string.loadingData));
+	    	mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 	    	mProgressDialog.setMax(MAX);
+	    	mProgressDialog.setProgress(0);
+	    	mProgressDialog.setCancelable(false);
+	    	mProgressDialog.setIndeterminate(false);
+	    	mProgressDialog.setIcon(R.drawable.panzer_general_icon);
+	    	mProgressDialog.show();
 	    }
 
 	    @Override
@@ -84,13 +100,14 @@ public final class LegacyReader {
 	    		final float unitSteps = 0;
 	    		final float iconSteps = 0.33f;
 	    		final float flagSteps = 0.66f;
+	    		
 	    		Resources resources = mContext.getResources();
-				publishProgress(mContext.getString(R.string.loadingUnit), unitSteps, 0f);
+				publishProgress(mContext.getString(R.string.loadingUnit), unitSteps);
 				UnitReader.loadUnits(resources, this);
-				publishProgress(mContext.getString(R.string.loadingIcons), iconSteps, 0.0f);
+				publishProgress(mContext.getString(R.string.loadingIcons), iconSteps);
 				UnitReader.loadIcons(resources, this);
 				
-				publishProgress(mContext.getString(R.string.loadingFlags), flagSteps, 0.0f);
+				publishProgress(mContext.getString(R.string.loadingFlags), flagSteps);
 				loadFlags(resources, this);
 				
 			} catch (IOException e) {
@@ -110,15 +127,20 @@ public final class LegacyReader {
 	    
 	    @Override
 	    protected void onProgressUpdate(Object... progress) {
-	    	if (progress[0] != null) {
+	    	final float stepSize  = 0.33f;
+	    	
+	    	if (progress.length == 2) {
 	    		mProgressDialog.setMessage((String) progress[0]);
-	    	}
-	    	if (progress[1] != null) {
+	    	
+	    		mCurrentStepStarts = (Float) progress[1];
 	    		mProgressDialog.setProgress(
-	    				(int) (mProgressDialog.getMax() * ((Float) progress[1])));
+	    				(int) (mProgressDialog.getMax() * mCurrentStepStarts));
+	    	} else {
+	    		float currentProgress = mCurrentStepStarts
+	    				+ (stepSize * ((Float) progress[0]));
+	    		mProgressDialog.setProgress(
+	    				(int) (mProgressDialog.getMax() * currentProgress));
 	    	}
-	    	mProgressDialog.setSecondaryProgress(
-	    			(int) (mProgressDialog.getMax() * ((Float) progress[2])));
 		}
 
 	    @Override
@@ -131,7 +153,7 @@ public final class LegacyReader {
 		 * @param percentage percentage
 		 */
 		public void setSecondaryStatus(float percentage) {
-			publishProgress(null, null, percentage);
+			publishProgress(percentage);
 		}
 		
 		/**
@@ -153,7 +175,21 @@ public final class LegacyReader {
 	 * @param context context
 	 */
 	public static void loadData(Context context) {
+		
+		registerSound();
 		new LoadLegacyTask(context).execute();
+	}
+	
+	/**
+	 * register sound into our sound system.
+	 */
+	private static void registerSound() {
+		SoundManager.registerSound(MoveType.Air, R.raw.air);
+		SoundManager.registerSound(MoveType.Leg, R.raw.leg);
+		SoundManager.registerSound(MoveType.Naval, R.raw.sea);
+		SoundManager.registerSound(MoveType.Tracked, R.raw.tracked);
+		SoundManager.registerSound(MoveType.HalfTracked, R.raw.tracked);
+		SoundManager.registerSound(MoveType.Wheeled, R.raw.wheeled);
 	}
 
 }
