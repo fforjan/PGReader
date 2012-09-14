@@ -1,7 +1,5 @@
 package com.pgreader.ui;
 
-import java.io.IOException;
-
 import com.pgreader.R;
 
 import android.content.Intent;
@@ -19,13 +17,6 @@ public class UnitDetailActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        try {
-			com.pgreader.legacy.UnitReader.loadUnits(getResources());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
         
         setContentView(R.layout.activity_unit_detail);
 

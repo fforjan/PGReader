@@ -136,19 +136,23 @@ public final class UnitReader {
 	/**
 	 * load units icons.
 	 * @param resources resource
+	 * @param callback callback for updating our progress.
 	 * @throws IOException if any error occurs while reading
 	 */
-	public static void loadIcons(Resources resources) throws IOException {
+	public static void loadIcons(Resources resources, LegacyReader.ProgressStatus callback) 
+			throws IOException {
 		InputStream tacIconsStream = resources.openRawResource(R.raw.tacicons);  
-    	DataRepository.setsTacIcons(ShpReader.load(tacIconsStream));
+    	DataRepository.setsTacIcons(ShpReader.load(tacIconsStream, callback));
 	}
 	
 	/**
 	 * load our units data from our resource bundle.
 	 * @param resources resource
+	 * @param callback callback for updating our progress.
 	 * @throws IOException if any error occurs while reading
 	 */
-	public static void loadUnits(Resources resources) throws IOException {
+	public static void loadUnits(Resources resources, LegacyReader.ProgressStatus callback) 
+			throws IOException {
 
 		InputStream stream = resources.openRawResource(R.raw.panzequp);
 
@@ -165,10 +169,11 @@ public final class UnitReader {
 		System.err.println(String.format("There is %d units to read", count));
 
 		//first entry is reserved
-		count--;
+		int current = 0;
 		stream.skip(UNITENTRYSIZE);
 
-		while (count-- > 0) {
+		while (++current < count) {
+			callback.setSecondaryStatus(((float) count) / current);
 			DataRepository.addItem(readEntry(stream));
 		}
 

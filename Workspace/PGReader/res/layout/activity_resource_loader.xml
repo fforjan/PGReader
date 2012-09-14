@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginBottom="48dp"
-        android:src="@drawable/panzer_general_coverart" />
+        android:src="@drawable/panzer_general_coverart"  
+        android:contentDescription="@string/panzerGeneralCovertArt"/>
 
 </RelativeLayout>

@@ -21,5 +21,6 @@
     <string name="title_activity_resource_loader">Load resources</string>
     <string name="pg_data_corrupted">The Panzer General data are &lt;b&gt;corrupted&lt;/b&gt;, Resources cannot be loaded</string>
     <string name="closeDialog">Close</string>
+    <string name="panzerGeneralCovertArt">Panzer General Covert Art</string>
 
 </resources>

@@ -66,4 +66,14 @@ public final class DataRepository {
 	public static void setsTacIcons(IconResources tacIcons) {
 		DataRepository.sTacIcons = tacIcons;
 	}
+	
+	/**
+	 * Clear all resources currently in use.
+	 */
+	public static void clearResources() {
+		DataRepository.sTacIcons = null;
+		sUnits.clear();
+		sUnitsMap.clear();
+	}
+	
 }

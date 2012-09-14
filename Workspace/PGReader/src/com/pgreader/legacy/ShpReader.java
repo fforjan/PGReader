@@ -30,6 +30,26 @@ import android.util.Pair;
 public final class ShpReader {
 	
 	/**
+	 * end percentage for the readHeaderAndPalettePositions.
+	 */
+	static final float READHEADERANDPALETTEPOSITIONS_STARTSTEP = 0f;
+	
+	/**
+	 * end percentage for the readPalettes.
+	 */
+	static final float READPALETTES_STARTSTEP = 0.33f;
+	
+	/**
+	 * end percentage for the readIcons.
+	 */
+	static final float READICONSEND_STARTSTEP = 0.66f;
+	
+	/**
+	 * size in percentage of a step.
+	 */
+	static final float STEPSIZE = 0.33f;
+	
+	/**
 	 * Dummy private constructor for utility class.
 	 */
 	private ShpReader() { }
@@ -224,11 +244,12 @@ public final class ShpReader {
 	/** 
 	 * Load a SHP file to a PG_Shp.
 	 * @throws IOException if there is any error while reading
+	 * @param callback callback for updating our progress.
 	 * @param file input stream to use for reading, the input stream must support marking 
 	 * @return the structure containing the bitmap loaded from the file or null 
 	 * if the file stream doesn't support marking.
 	 */
-	public static IconResources load(InputStream file)
+	public static IconResources load(InputStream file, LegacyReader.ProgressStatus callback)
 			throws IOException {
 		if (!file.markSupported()) {
 			return null;
@@ -241,16 +262,16 @@ public final class ShpReader {
 	    file.skip(INTSIZE);
 	    
 	    Vector<Pair<Integer, Integer>> headerAndPalettePositions = 
-	    		readHeaderAndPalettePositions(file);	        
+	    		readHeaderAndPalettePositions(file, callback);	        
 	    if (headerAndPalettePositions == null) {
 	    	return null;
 	    }
 	    
-	    Point size = readPalettes(file, result, headerAndPalettePositions);
+	    Point size = readPalettes(file, result, headerAndPalettePositions, callback);
 	    
 	    result.createSurface(size.x, size.y);
 	    		
-	    readIcons(file, result, headerAndPalettePositions);
+	    readIcons(file, result, headerAndPalettePositions, callback);
 	    return result;
 	}
 
@@ -259,13 +280,17 @@ public final class ShpReader {
 	 * @param file the input stream
 	 * @param result the PGShp where the palettes will be set
 	 * @param headerAndPalettePositions position information
+	 * @param callback callback for updating our progress.
 	 * @throws IOException if there is any error while reading
 	 * @return Point which is the size for a bitmap to contains all the icons stack vertically
 	 */
 	private static Point readPalettes(InputStream file, IconResources result,
-			Vector<Pair<Integer, Integer>> headerAndPalettePositions)
+			Vector<Pair<Integer, Integer>> headerAndPalettePositions,
+			LegacyReader.ProgressStatus callback)
 			throws IOException {
 		Point size = new Point();
+		float stepIncrement = STEPSIZE / headerAndPalettePositions.size();
+		float currentProgress = READPALETTES_STARTSTEP;
 	    for (Pair<Integer, Integer> headerPosition:headerAndPalettePositions) {
 	    	result.getOffsets().add(size.y);
 	    	file.reset();
@@ -278,6 +303,10 @@ public final class ShpReader {
 	        size.y += header.getHeight();
 	       
 	        result.getHeaders().add(header);
+	        
+	        //our status
+	        currentProgress += stepIncrement;
+	    	callback.setSecondaryStatus(currentProgress);
 	    }
 	    return size;
 	}
@@ -287,13 +316,20 @@ public final class ShpReader {
 	 * @param file the input stream
 	 * @param result the PGShp where the icons will be set
 	 * @param headerAndPalettePositions position information
+	 * @param callback callback for updating our progress.
 	 * @throws IOException if there is any error while reading
 	 */
 	private static void readIcons(InputStream file, IconResources result,
-			Vector<Pair<Integer, Integer>> headerAndPalettePositions)
+			Vector<Pair<Integer, Integer>> headerAndPalettePositions,
+			LegacyReader.ProgressStatus callback)
 			throws IOException {
+		
+		callback.setSecondaryStatus(READICONSEND_STARTSTEP);
+	    
+		int count = headerAndPalettePositions.size();
+		
 		/* read icons */
-	    for (int i = 0; i < headerAndPalettePositions.size(); i++) {
+	    for (int i = 0; i < count; i++) {
 	    	Pair<Integer, Integer> headerAndPalettePosition = 
 	    			headerAndPalettePositions.get(i);
 	    	
@@ -315,17 +351,27 @@ public final class ShpReader {
 	        	readIcon(file, result.getSurface(), result.getOffsets().get(i), 
 	        			actualPal, result.getHeaders().get(i));
 	        }
+	        
+	        //our status
+	    	callback.setSecondaryStatus(
+	    			READICONSEND_STARTSTEP + STEPSIZE * i / count);
 	    }
 	}
 
 	/**
 	 * Read the header and palette positions per icon.
 	 * @param file input stream.
+	 * @param callback callback for updating our progress.
 	 * @return list of data <header,palette> for each icon
 	 * @throws IOException if any errors occurs while reading
 	 */
 	private static Vector<Pair<Integer, Integer>> readHeaderAndPalettePositions(
-			InputStream file) throws IOException {
+			InputStream file,
+			LegacyReader.ProgressStatus callback) throws IOException {
+		
+		// first task, so set ourself to 0%
+		callback.setSecondaryStatus(READHEADERANDPALETTEPOSITIONS_STARTSTEP);
+		
 		/* icon count */
 	    byte[] rawBuffer =  new byte[INTSIZE];
 	    file.read(rawBuffer);
@@ -349,6 +395,9 @@ public final class ShpReader {
 	        /* read file position of actual data and palette */	
 	    	headerAndPalettePositions.add(
 	    			new Pair<Integer, Integer>(buffer.getInt(), buffer.getInt()));
+	    	//our status
+	    	callback.setSecondaryStatus(
+	    			READHEADERANDPALETTEPOSITIONS_STARTSTEP + STEPSIZE * i / count);
 	    }
 		return headerAndPalettePositions;
 	}
