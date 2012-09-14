@@ -56,7 +56,7 @@ public class UnitListFragment extends ListFragment {
         setListAdapter(new ArrayAdapter<UnitEntry>(getActivity(),
                 R.layout.simple_list_item_activated_1,
                 R.id.text1,
-                DataRepository.Items));
+                DataRepository.getsUnits()));
     }
 
     @Override
@@ -87,7 +87,7 @@ public class UnitListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
-        mCallbacks.onItemSelected(DataRepository.Items.get(position).Name);
+        mCallbacks.onItemSelected(DataRepository.getsUnits().get(position).getName());
     }
 
     @Override

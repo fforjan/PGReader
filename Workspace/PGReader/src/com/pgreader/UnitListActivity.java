@@ -1,5 +1,7 @@
 package com.pgreader;
 
+import java.io.IOException;
+
 import com.panzergeneral.DataRepository;
 
 import android.content.Intent;
@@ -22,7 +24,12 @@ public class UnitListActivity extends FragmentActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        DataRepository.Load(getResources());
+        try {
+			DataRepository.loadUnits(getResources());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         setContentView(R.layout.activity_unit_list);
 

@@ -32,9 +32,6 @@ public enum TargetType {
 	 * @return the target type
 	 */
 	public static TargetType from(int index) {
-		if (index > VALUES.length || index < 0) {
-			index = 0;
-		}
 		return VALUES[index];
 	}
 }

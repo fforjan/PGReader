@@ -77,7 +77,7 @@ public class UnitDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         
         if (getArguments().containsKey(ARG_UNITID)) {
-            mItem = DataRepository.ItemsMap.get(getArguments().getString(ARG_UNITID));
+            mItem = DataRepository.getsUnitsMap().get(getArguments().getString(ARG_UNITID));
         }
         
         
@@ -90,33 +90,33 @@ public class UnitDetailFragment extends Fragment {
         
         if (mItem != null) {
             getTextView(rootView, R.id.unit_detail)
-            	.setText(String.format("%s [%s]", mItem.Name, mItem.Class));
+            	.setText(String.format("%s [%s]", mItem.getName(), mItem.getUnitClass()));
 
             getTextView(rootView, R.id.attackAir)
-            	.setText(String.valueOf(mItem.atk_air));
+            	.setText(String.valueOf(mItem.getAtkAir()));
             getTextView(rootView, R.id.attackHard)
-            	.setText(String.valueOf(mItem.atk_hard));
+            	.setText(String.valueOf(mItem.getAtkHard()));
             getTextView(rootView, R.id.attackNaval)
-            	.setText(String.valueOf(mItem.atk_naval));
+            	.setText(String.valueOf(mItem.getAtkNaval()));
             getTextView(rootView, R.id.attackSoft)
-            	.setText(String.valueOf(mItem.atk_soft));
+            	.setText(String.valueOf(mItem.getAtkSoft()));
 
             getTextView(rootView, R.id.defAir)
-            	.setText(String.valueOf(mItem.def_air));
+            	.setText(String.valueOf(mItem.getDefAir()));
             getTextView(rootView, R.id.defClose)
-            	.setText(String.valueOf(mItem.def_close));
+            	.setText(String.valueOf(mItem.getDefClose()));
             getTextView(rootView, R.id.defGround)
-            	.setText(String.valueOf(mItem.def_ground));
+            	.setText(String.valueOf(mItem.getDefGround()));
             getTextView(rootView, R.id.targetType)
-            	.setText(String.valueOf(mItem.TargetType));  
+            	.setText(String.valueOf(mItem.getTargetType()));  
             
 
             getTextView(rootView, R.id.nation)
-        	.setText(String.valueOf(mItem.nation));
+        	.setText(String.valueOf(mItem.getNation()));
             getTextView(rootView, R.id.moveType)
-        	.setText(String.valueOf(mItem.MoveType));  
+        	.setText(String.valueOf(mItem.getMoveType()));  
 
-            getUnitView(rootView).setIconIndex(mItem.pic_id);
+            getUnitView(rootView).setIconIndex(mItem.getIconIndex());
             
         }
         return rootView;

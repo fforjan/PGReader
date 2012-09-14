@@ -13,71 +13,78 @@ import com.pgreader.R;
 
 import android.content.res.Resources;
 
+/**
+ * data repository for reading legacy PG data.
+ */
 public final class DataRepository {
 
+	/**
+	 * Utility class, private constructor.
+	 */
 	private DataRepository() { } 
 
-	public static List<UnitEntry> Items = new ArrayList<UnitEntry>();
-	public static Map<String, UnitEntry> ItemsMap = new HashMap<String, UnitEntry>();
+	/**
+	 * Unit lists.
+	 */
+	private static List<UnitEntry> sUnits = new ArrayList<UnitEntry>();
+	
+	/**
+	 * map for accessing the unit from its id.
+	 */
+	private static Map<String, UnitEntry> sUnitsMap = new HashMap<String, UnitEntry>();
 
-	public static void DummyInit() {
-
-		UnitEntry tmp = new UnitEntry();
-		tmp.Name = "Unit 1";
-		tmp.Class = UnitClass.INFANTRY;
-		tmp.TargetType = TargetType.Soft;
-		tmp.MoveType = MoveType.Leg;
-		addItem(tmp);
-
-		tmp = new UnitEntry();
-		tmp.Name = "Unit 2";
-		tmp.Class = UnitClass.FIGHTER;
-		tmp.TargetType = TargetType.Air;
-		tmp.MoveType = MoveType.Air;
-		addItem(tmp);
-
-		tmp = new UnitEntry();
-		tmp.Name = "Unit 3";
-		tmp.Class = UnitClass.TANK;
-		tmp.TargetType = TargetType.Hard;
-		tmp.MoveType = MoveType.Tracked;
-		addItem(tmp);
+	/**
+	 * add a unit into our unit list.
+	 * @param unit unit to add
+	 */
+	private static void addItem(UnitEntry unit) {
+		sUnits.add(unit);
+		sUnitsMap.put(unit.getName(), unit);
 	}
 
-	private static void addItem(UnitEntry item) {
-		Items.add(item);
-		ItemsMap.put(item.Name, item);
-	}
+	/**
+	 * load our equipment data from our resource bundle.
+	 * @param resources resource
+	 * @throws IOException if any error occurs while reading
+	 */
+	public static void loadUnits(Resources resources) throws IOException {
+		if (sUnits.isEmpty()) {
+			InputStream stream = resources.openRawResource(R.raw.panzequp);
 
-	public static void Load(Resources resources) {
-		if (Items.isEmpty()) {
-			try {
-				InputStream stream = resources.openRawResource(R.raw.panzequp);
+			byte[] buffer = new byte[2];
+			stream.read(buffer);
 
-				byte[] buffer = new byte[2];
-				stream.read(buffer);
+			ByteBuffer countBuffer = ByteBuffer.wrap(buffer);
+			countBuffer.order(ByteOrder.LITTLE_ENDIAN);
+			/* DOS format:
+			 * count ( 2 bytes )
+			 * entries ( 50 bytes each ) 
+			 */
+			int count = countBuffer.getShort();
+			System.err.println(String.format("There is %d units to read", count));
 
-				ByteBuffer countBuffer = ByteBuffer.wrap(buffer);
-				countBuffer.order(ByteOrder.LITTLE_ENDIAN);
-				/* DOS format:
-				 * count ( 2 bytes )
-				 * entries ( 50 bytes each ) 
-				 */
-				int count = countBuffer.getShort();
-				System.err.println(String.format("There is %d units to read", count));
+			//first entry is reserved
+			count--;
+			stream.skip(UnitEntry.UNITENTRYSIZE);
 
-				//first entry is reserved
-				count--;
-				stream.skip(UnitEntry.UNITENTRYSIZE);
-
-				while (count-- > 0) {
-					addItem(UnitEntry.readEntry(stream));
-				}
-			} catch (Resources.NotFoundException ex) {
-				DummyInit();
-			} catch (IOException e) {
-				DummyInit();
+			while (count-- > 0) {
+				addItem(UnitEntry.readEntry(stream));
 			}
+
 		}
+	}
+
+	/**
+	 * @return the sUnitsMap map, key is unit id and value the unit itself
+	 */
+	public static Map<String, UnitEntry> getsUnitsMap() {
+		return sUnitsMap;
+	}
+
+	/**
+	 * @return the list of units
+	 */
+	public static List<UnitEntry> getsUnits() {
+		return sUnits;
 	}
 }
