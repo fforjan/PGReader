@@ -8,6 +8,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.util.AttributeSet;
 import android.view.View;
 
 
@@ -22,7 +23,7 @@ public class IconsResourceSingleView extends View {
 	/**
 	 * the SHP containing the icons to be displayed.
 	 */
-	private IconResources mShpIcons = null;
+	private IconResources mIcons = null;
 	
 	/**
 	 * index of  the icon to be displayed.
@@ -39,6 +40,15 @@ public class IconsResourceSingleView extends View {
 		mIconIndex = index;
 		this.invalidate();
 	}
+	/**
+	 * set the icons resources.
+	 * @param icons icons resources
+	 */
+	public void setIconResources(IconResources icons) {
+		if (icons != this.mIcons) {
+			this.mIcons = icons;
+		}
+	}
 
 	/***
 	 * instantiate a new view.
@@ -48,7 +58,8 @@ public class IconsResourceSingleView extends View {
 	 */
 	public IconsResourceSingleView(Context context) {
 		super(context);
-		throw new UnsupportedOperationException();
+		mIcons = null;
+		mIconIndex = -1;
 	}
 	
 	/***
@@ -56,32 +67,48 @@ public class IconsResourceSingleView extends View {
 	 * The background color would be magenta by default.
 	 * There is no icon set by default
 	 * @param context context
-	 * @param icons SHP file to be used
+	 * @param attrs attribute set
 	 */
-	public IconsResourceSingleView(Context context, IconResources icons) {
-		super(context);
-		mShpIcons = icons;
+	public IconsResourceSingleView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		mIcons = null;
 		mIconIndex = -1;
-		this.setBackgroundColor(Color.MAGENTA);
 	}
+	
+	/***
+	 * instantiate a new view.
+	 * The background color would be magenta by default.
+	 * There is no icon set by default
+	 * @param context context
+	 * @param attrs attribute set
+	 * @param defStyle default style
+	 */
+	public IconsResourceSingleView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		this.setBackgroundColor(Color.MAGENTA);
+		mIcons = null;
+		mIconIndex = -1;
+	}
+	
+	 
 
 	@SuppressLint("DrawAllocation")
 	@Override
 	protected void onDraw(Canvas canvas) {
 		final int iPadding = 5;
 		
-		if (mIconIndex > 0 && mShpIcons != null) {
-			IconHeader currentIcon = mShpIcons.getHeaders().get(mIconIndex);
+		if (mIconIndex > 0 && mIcons != null) {
+			IconHeader currentIcon = mIcons.getHeaders().get(mIconIndex);
 			
 			Rect source = new Rect(currentIcon.getIconBound());
-			source.offset(0, mShpIcons.getOffsets().get(mIconIndex));
+			source.offset(0, mIcons.getOffsets().get(mIconIndex));
 			
 			// The image will be scaled so it will fill the width, and the
 			// height will preserve the image’s aspect ration
 			double aspectRatio = ((double) source.width()) / source.height();
 			Rect dest = new Rect(iPadding, iPadding, this.getWidth() - iPadding,
 					(int) ((this.getHeight() - iPadding) / aspectRatio));
-			canvas.drawBitmap(mShpIcons.getSurface(), source, dest, null);
+			canvas.drawBitmap(mIcons.getSurface(), source, dest, null);
 		}
 	}
 

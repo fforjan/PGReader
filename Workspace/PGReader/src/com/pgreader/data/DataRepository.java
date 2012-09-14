@@ -24,6 +24,11 @@ public final class DataRepository {
      * the unit icons information from the SHP file.
      */
     private static IconResources sTacIcons;
+    
+    /**
+     * the flags information from the SHP file.
+     */
+    private static IconResources sFlags;
 	
 	/**
 	 * map for accessing the unit from its id.
@@ -74,6 +79,20 @@ public final class DataRepository {
 		DataRepository.sTacIcons = null;
 		sUnits.clear();
 		sUnitsMap.clear();
+	}
+
+	/**
+	 * @return the sFlags
+	 */
+	public static IconResources getFlags() {
+		return sFlags;
+	}
+
+	/**
+	 * @param flags the sFlags to set
+	 */
+	public static void setFlags(IconResources flags) {
+		DataRepository.sFlags = flags;
 	}
 	
 }

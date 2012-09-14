@@ -1,21 +1,43 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/MainUnitLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <TextView
-        android:id="@+id/unit_detail"
-        style="?android:attr/textAppearanceLarge"
+
+    <RelativeLayout
+        android:id="@+id/detailLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        tools:context=".ui.UnitDetailFragment" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal" >
+
+        <com.pgreader.ui.view.IconsResourceSingleView
+            android:id="@+id/unitFlag"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:id="@+id/unit_detail"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/unitFlag"
+            android:padding="16dp"
+            tools:context=".ui.UnitDetailFragment" />
+
+    </RelativeLayout>
 
     <TableLayout
-        android:layout_width="match_parent"
+        android:id="@+id/propTable"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/detailLayout"
         android:layout_margin="10dp" >
 
         <TableRow
@@ -30,7 +52,7 @@
             <TextView
                 android:id="@+id/attackAir"
                 android:layout_width="30dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="120dp"
@@ -41,14 +63,13 @@
                 android:id="@+id/defAir"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content" />
-
         </TableRow>
 
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-            
-             <TextView
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/attackHard" />
@@ -56,7 +77,7 @@
             <TextView
                 android:id="@+id/attackHard"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,14 +88,13 @@
                 android:id="@+id/defGround"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            
         </TableRow>
 
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-            
-             <TextView
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/attackNaval" />
@@ -82,7 +102,7 @@
             <TextView
                 android:id="@+id/attackNaval"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -93,14 +113,13 @@
                 android:id="@+id/defClose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            
         </TableRow>
 
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-            
-             <TextView
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/attackSoft" />
@@ -108,7 +127,7 @@
             <TextView
                 android:id="@+id/attackSoft"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -119,35 +138,40 @@
                 android:id="@+id/targetType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            
         </TableRow>
-        
+
         <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:text="@string/moveType" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/moveType" />
+            <TextView
+                android:id="@+id/moveType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/moveType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nation" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nation" />
-
-                <TextView
-                    android:id="@+id/nation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </TableRow>
+            <TextView
+                android:id="@+id/nation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
     </TableLayout>
-    
- 
 
-</LinearLayout>
+    <com.pgreader.ui.view.IconsResourceSingleView
+        android:id="@+id/unitIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/detailLayout"
+        android:layout_toRightOf="@+id/propTable"
+        android:background="@color/Magenta" />
+
+</RelativeLayout>

@@ -16,11 +16,6 @@ import com.pgreader.ui.view.IconsResourceSingleView;
  * fragment displaying the unit detail.
  */
 public class UnitDetailFragment extends Fragment {
-
-	/**
-	 * default size for the PGShpSingleView for unit icon.
-	 */
-	private static final int ICONDEFAULTSIZE = 100;
 	
 	/** 
 	 * Argument name when invoking the fragment defining current unit id.
@@ -34,26 +29,14 @@ public class UnitDetailFragment extends Fragment {
     private UnitEntry mItem;
     
     /**
-     * our view for the unit icon.
-     */
-    private IconsResourceSingleView mUnitView;
-    
-    /**
-     * if method return the current rootView.
-     * If this object is existing, it will be created.
+     * if method return the view of type IconsResourceSingleView.
      * @param rootView view containing the main layout
+     * @param id view id
      * @return the new view
      */
-    private IconsResourceSingleView getUnitView(View rootView) {
+    private IconsResourceSingleView getIconView(View rootView, int id) {
     		        
-        if (mUnitView == null) {
-        	android.widget.LinearLayout layout =
-        			((android.widget.LinearLayout) rootView.findViewById(R.id.MainUnitLayout));
-        	mUnitView = new IconsResourceSingleView(layout.getContext(), 
-        			DataRepository.getsTacIcons());
-        	layout.addView(mUnitView, ICONDEFAULTSIZE, ICONDEFAULTSIZE);	
-        }
-        return mUnitView;
+        return ((IconsResourceSingleView) rootView.findViewById(id));
     }
 
     @Override
@@ -73,7 +56,10 @@ public class UnitDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_unit_detail, container, false);
         
         if (mItem != null) {
-            getTextView(rootView, R.id.unit_detail)
+        	getIconView(rootView, R.id.unitIcon).setIconResources(DataRepository.getsTacIcons()); 
+        	getIconView(rootView, R.id.unitFlag).setIconResources(DataRepository.getFlags()); 
+            
+        	getTextView(rootView, R.id.unit_detail)
             	.setText(String.format("%s [%s]", mItem.getName(), mItem.getUnitClass()));
 
             getTextView(rootView, R.id.attackAir)
@@ -100,7 +86,8 @@ public class UnitDetailFragment extends Fragment {
             getTextView(rootView, R.id.moveType)
         	.setText(String.valueOf(mItem.getMoveType()));  
 
-            getUnitView(rootView).setIconIndex(mItem.getIconIndex());
+            getIconView(rootView, R.id.unitIcon).setIconIndex(mItem.getIconIndex());
+            getIconView(rootView, R.id.unitFlag).setIconIndex(mItem.getNation().ordinal());
             
         }
         return rootView;

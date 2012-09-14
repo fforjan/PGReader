@@ -1,8 +1,10 @@
 package com.pgreader.legacy;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import com.pgreader.R;
+import com.pgreader.data.DataRepository;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -74,19 +76,23 @@ public final class LegacyReader {
 	    	mProgressDialog = ProgressDialog.show(mContext, "Please wait",
 					"Long operation starts...", false, false);
 	    	mProgressDialog.setMax(MAX);
-	    	mProgressDialog.setProgress(0);
 	    }
 
 	    @Override
 	    protected Void doInBackground(Void... params) {
 	    	try {
 	    		final float unitSteps = 0;
-	    		final float iconSteps = 0.5f;
+	    		final float iconSteps = 0.33f;
+	    		final float flagSteps = 0.66f;
 	    		Resources resources = mContext.getResources();
 				publishProgress("Loading units...", unitSteps, 0f);
 				UnitReader.loadUnits(resources, this);
 				publishProgress("Loading icons...", iconSteps, 0.0f);
 				UnitReader.loadIcons(resources, this);
+				
+				publishProgress("Loading flags...", flagSteps, 0.0f);
+				loadFlags(resources, this);
+				
 			} catch (IOException e) {
 				AlertDialog ad = new AlertDialog.Builder(mContext).create();  
 				ad.setCancelable(false); // This blocks the 'BACK' button  
@@ -126,6 +132,18 @@ public final class LegacyReader {
 		 */
 		public void setSecondaryStatus(float percentage) {
 			publishProgress(null, null, percentage);
+		}
+		
+		/**
+		 * load flags from resources.
+		 * @param resources resources
+		 * @param callback callback
+		 * @throws IOException  if there is any IO error
+		 */
+		private static void loadFlags(Resources resources, ProgressStatus callback) 
+				throws IOException {
+			InputStream flagshp = resources.openRawResource(R.raw.flags);
+			DataRepository.setFlags(ShpReader.load(flagshp, callback));
 		}
 	}
 
