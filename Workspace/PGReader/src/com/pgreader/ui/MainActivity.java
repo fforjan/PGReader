@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        Button button = (Button) findViewById(R.id.unitBrowser);
+        View button = (View) findViewById(R.id.unitBrowser);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	// start the activity for display the unit browser

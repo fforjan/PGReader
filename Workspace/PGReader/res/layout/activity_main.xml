@@ -1,22 +1,26 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
+    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <Button
-        android:id="@+id/unitBrowser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/unitBrowser" />
-
-    <Button
         android:id="@+id/manageResources"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/unitBrowser"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:text="@string/manageResources" />
 
-</LinearLayout>
+    <ImageButton
+        android:id="@+id/unitBrowser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:contentDescription="@string/unitBrowser"
+        android:src="@drawable/soldier" />
+
+</RelativeLayout>
