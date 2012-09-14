@@ -1,0 +1,29 @@
+<resources>
+    <string name="title_unit_detail">Detail de l\'unite</string>
+    <string name="title_unit_list">Unites</string>
+    <string name="attackAir">Attaque aerienne</string>
+    <string name="defenseAir">Defense Aerienne</string>
+    <string name="attackHard">Attaque cible dur</string>
+    <string name="defenseGround">Defense au sol</string>
+    <string name="attackNaval">Attaque naval</string>
+    <string name="defenseClose">Defense rapproche</string>
+    <string name="attackSoft">Attaque cible mouvante</string>
+    <string name="targetType">Type de cible</string>
+    <string name="unitImage">image de l\'unite</string>
+    <string name="moveType">type de deplacement</string>
+    <string name="nation">Nation</string>
+    <string name="menu_settings">Configuration</string>
+    <string name="manageResources">Gerer les Resources</string>
+    <string name="unitBrowser">Explorateur d\'unite</string>
+    <string name="title_activity_resource_loader">Charger des resources</string>
+    <string name="pg_data_corrupted">Les donnees de Panzer General sont &lt;b&gt;invalides&lt;/b&gt;, les Resources ne peuvent etre chargees</string>
+    <string name="closeDialog">Fermer</string>
+    <string name="panzerGeneralCovertArt">Panzer General couverture</string>
+    <string name="pleaseWait">Patientez…</string>
+    <string name="loadingData">Chargement des donnees…</string>
+    <string name="loadingUnit">Chargement des unites…</string>
+    <string name="loadingIcons">Chargement des icones…</string>
+    <string name="loadingFlags">Chargement des drapeaux…</string>
+    <string name="askForResourceSet">Avez-vous charger des resources ?</string>
+	<string name="cannotFindUnits">Impossible de trouver une unite</string>
+</resources>

@@ -1,7 +1,9 @@
 package com.pgreader.ui;
 
 import com.pgreader.R;
+import com.pgreader.data.DataRepository;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -29,6 +31,14 @@ public class UnitListActivity extends FragmentActivity
             ((UnitListFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.unit_list))
                     .setActivateOnItemClick(true);
+        }
+        
+        if (DataRepository.getsUnits().size() == 0) {
+	        AlertDialog alertDialog;
+	        alertDialog = new AlertDialog.Builder(this).create();
+	        alertDialog.setTitle(getString(R.string.cannotFindUnits));
+	        alertDialog.setMessage(getString(R.string.askForResourceSet));
+	        alertDialog.show();
         }
     }
 

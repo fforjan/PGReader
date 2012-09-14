@@ -73,8 +73,8 @@ public final class LegacyReader {
 	    
 	    @Override
 	    protected void onPreExecute() {
-	    	mProgressDialog = ProgressDialog.show(mContext, "Please wait",
-					"Long operation starts...", false, false);
+	    	mProgressDialog = ProgressDialog.show(mContext, mContext.getString(R.string.pleaseWait),
+					mContext.getString(R.string.loadingData), false, false);
 	    	mProgressDialog.setMax(MAX);
 	    }
 
@@ -85,12 +85,12 @@ public final class LegacyReader {
 	    		final float iconSteps = 0.33f;
 	    		final float flagSteps = 0.66f;
 	    		Resources resources = mContext.getResources();
-				publishProgress("Loading units...", unitSteps, 0f);
+				publishProgress(mContext.getString(R.string.loadingUnit), unitSteps, 0f);
 				UnitReader.loadUnits(resources, this);
-				publishProgress("Loading icons...", iconSteps, 0.0f);
+				publishProgress(mContext.getString(R.string.loadingIcons), iconSteps, 0.0f);
 				UnitReader.loadIcons(resources, this);
 				
-				publishProgress("Loading flags...", flagSteps, 0.0f);
+				publishProgress(mContext.getString(R.string.loadingFlags), flagSteps, 0.0f);
 				loadFlags(resources, this);
 				
 			} catch (IOException e) {
