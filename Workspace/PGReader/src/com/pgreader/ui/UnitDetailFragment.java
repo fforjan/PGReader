@@ -8,7 +8,7 @@ import com.pgreader.data.DataRepository;
 import com.pgreader.data.IconResources;
 import com.pgreader.data.UnitEntry;
 import com.pgreader.legacy.ShpReader;
-import com.pgreader.ui.view.PGShpSingleView;
+import com.pgreader.ui.view.IconsResourceSingleView;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -47,7 +47,7 @@ public class UnitDetailFragment extends Fragment {
     /**
      * our view for the unit icon.
      */
-    private PGShpSingleView mUnitView;
+    private IconsResourceSingleView mUnitView;
     
     /**
      * if method return the current rootView.
@@ -55,7 +55,7 @@ public class UnitDetailFragment extends Fragment {
      * @param rootView view containing the main layout
      * @return the new view
      */
-    private PGShpSingleView getUnitView(View rootView) {
+    private IconsResourceSingleView getUnitView(View rootView) {
     	if (sTacIcons == null) {
         	InputStream tacIconsStream = getResources().openRawResource(R.raw.tacicons);  
         	try {
@@ -67,7 +67,7 @@ public class UnitDetailFragment extends Fragment {
         if (mUnitView == null) {
         	android.widget.LinearLayout layout =
         			((android.widget.LinearLayout) rootView.findViewById(R.id.MainUnitLayout));
-        	mUnitView = new PGShpSingleView(layout.getContext(), sTacIcons);
+        	mUnitView = new IconsResourceSingleView(layout.getContext(), sTacIcons);
         	layout.addView(mUnitView, ICONDEFAULTSIZE, ICONDEFAULTSIZE);	
         }
         return mUnitView;

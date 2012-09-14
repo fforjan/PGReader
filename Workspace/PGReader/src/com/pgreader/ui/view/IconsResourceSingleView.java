@@ -17,7 +17,7 @@ import android.view.View;
  * @author FREDERIC FORJAN <GeoVah>
  *
  */
-public class PGShpSingleView extends View {
+public class IconsResourceSingleView extends View {
 	
 	/**
 	 * the SHP containing the icons to be displayed.
@@ -46,7 +46,7 @@ public class PGShpSingleView extends View {
 	 * There is no icon set by default
 	 * @param context context
 	 */
-	public PGShpSingleView(Context context) {
+	public IconsResourceSingleView(Context context) {
 		super(context);
 		throw new UnsupportedOperationException();
 	}
@@ -58,7 +58,7 @@ public class PGShpSingleView extends View {
 	 * @param context context
 	 * @param icons SHP file to be used
 	 */
-	public PGShpSingleView(Context context, IconResources icons) {
+	public IconsResourceSingleView(Context context, IconResources icons) {
 		super(context);
 		mShpIcons = icons;
 		mIconIndex = -1;
