@@ -1,10 +1,13 @@
-package com.panzergeneral.shp; 
+package com.pgreader.legacy; 
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Vector;
+
+import com.pgreader.data.IconHeader;
+import com.pgreader.data.IconResources;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -225,14 +228,14 @@ public final class ShpReader {
 	 * @return the structure containing the bitmap loaded from the file or null 
 	 * if the file stream doesn't support marking.
 	 */
-	public static PGShp load(InputStream file)
+	public static IconResources load(InputStream file)
 			throws IOException {
 		if (!file.markSupported()) {
 			return null;
 		}
 		
 		file.mark(-1);
-	    PGShp result = new PGShp(); 
+	    IconResources result = new IconResources(); 
 	    
 	    /* magic */
 	    file.skip(INTSIZE);
@@ -259,7 +262,7 @@ public final class ShpReader {
 	 * @throws IOException if there is any error while reading
 	 * @return Point which is the size for a bitmap to contains all the icons stack vertically
 	 */
-	private static Point readPalettes(InputStream file, PGShp result,
+	private static Point readPalettes(InputStream file, IconResources result,
 			Vector<Pair<Integer, Integer>> headerAndPalettePositions)
 			throws IOException {
 		Point size = new Point();
@@ -286,7 +289,7 @@ public final class ShpReader {
 	 * @param headerAndPalettePositions position information
 	 * @throws IOException if there is any error while reading
 	 */
-	private static void readIcons(InputStream file, PGShp result,
+	private static void readIcons(InputStream file, IconResources result,
 			Vector<Pair<Integer, Integer>> headerAndPalettePositions)
 			throws IOException {
 		/* read icons */

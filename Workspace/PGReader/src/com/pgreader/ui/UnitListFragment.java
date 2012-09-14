@@ -1,7 +1,7 @@
-package com.pgreader;
+package com.pgreader.ui;
 
-import com.panzergeneral.DataRepository;
-import com.panzergeneral.UnitEntry;
+import com.pgreader.data.DataRepository;
+import com.pgreader.data.UnitEntry;
 
 import android.R;
 import android.app.Activity;

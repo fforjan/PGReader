@@ -1,8 +1,8 @@
-package com.pgreader;
+package com.pgreader.ui;
 
 import java.io.IOException;
 
-import com.panzergeneral.DataRepository;
+import com.pgreader.R;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ public class UnitListActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         
         try {
-			DataRepository.loadUnits(getResources());
+        	com.pgreader.legacy.UnitReader.loadUnits(getResources());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

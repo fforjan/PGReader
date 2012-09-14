@@ -1,7 +1,8 @@
-package com.panzergeneral.shp; 
+package com.pgreader.data; 
 
 import java.util.List;
 import java.util.Vector;
+
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -12,7 +13,7 @@ import android.graphics.Color;
  * and the information for the icon and the offset into this image.
  * @author FREDERIC FORJAN
  */
-public class PGShp {
+public class IconResources {
 	
 	/**
 	 * surface for the icons.

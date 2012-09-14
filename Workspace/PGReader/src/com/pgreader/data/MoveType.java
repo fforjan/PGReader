@@ -1,4 +1,4 @@
-package com.panzergeneral;
+package com.pgreader.data;
 
 /**
  * move type for a unit.

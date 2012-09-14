@@ -1,4 +1,4 @@
-package com.panzergeneral.shp;
+package com.pgreader.data;
 
 import java.io.IOException;
 import java.io.InputStream;

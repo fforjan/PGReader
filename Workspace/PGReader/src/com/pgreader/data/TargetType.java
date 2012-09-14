@@ -1,4 +1,4 @@
-package com.panzergeneral;
+package com.pgreader.data;
 
 /** 
  * enum for target type.

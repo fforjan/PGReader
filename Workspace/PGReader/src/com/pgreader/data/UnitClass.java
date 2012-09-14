@@ -1,4 +1,4 @@
-package com.panzergeneral; 
+package com.pgreader.data; 
 
 /** 
  * Enum for the unit class.

@@ -7,9 +7,9 @@
     android:layout_marginRight="16dp"
     android:divider="?android:attr/dividerHorizontal"
     android:showDividers="middle"
-    tools:context=".UnitListActivity">
+    tools:context=".ui.UnitListActivity">
 
-    <fragment android:name="com.pgreader.UnitListFragment"
+    <fragment android:name="com.pgreader.ui.UnitListFragment"
         android:id="@+id/unit_list"
         android:layout_width="0dp"
         android:layout_height="match_parent"

@@ -1,7 +1,7 @@
-package com.pgreader.view;
+package com.pgreader.ui.view;
 
-import com.panzergeneral.shp.IconHeader;
-import com.panzergeneral.shp.PGShp;
+import com.pgreader.data.IconHeader;
+import com.pgreader.data.IconResources;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -22,7 +22,7 @@ public class PGShpSingleView extends View {
 	/**
 	 * the SHP containing the icons to be displayed.
 	 */
-	private PGShp mShpIcons = null;
+	private IconResources mShpIcons = null;
 	
 	/**
 	 * index of  the icon to be displayed.
@@ -58,7 +58,7 @@ public class PGShpSingleView extends View {
 	 * @param context context
 	 * @param icons SHP file to be used
 	 */
-	public PGShpSingleView(Context context, PGShp icons) {
+	public PGShpSingleView(Context context, IconResources icons) {
 		super(context);
 		mShpIcons = icons;
 		mIconIndex = -1;

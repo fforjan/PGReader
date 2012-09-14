@@ -1,13 +1,14 @@
-package com.pgreader;
+package com.pgreader.ui;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.panzergeneral.DataRepository;
-import com.panzergeneral.UnitEntry;
-import com.panzergeneral.shp.PGShp;
-import com.panzergeneral.shp.ShpReader;
-import com.pgreader.view.PGShpSingleView;
+import com.pgreader.R;
+import com.pgreader.data.DataRepository;
+import com.pgreader.data.IconResources;
+import com.pgreader.data.UnitEntry;
+import com.pgreader.legacy.ShpReader;
+import com.pgreader.ui.view.PGShpSingleView;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,7 +35,7 @@ public class UnitDetailFragment extends Fragment {
     /**
      * the unit icons information from the SHP file.
      */
-    private static PGShp sTacIcons;
+    private static IconResources sTacIcons;
     
 
     /**
