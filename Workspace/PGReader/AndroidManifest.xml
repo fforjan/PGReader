@@ -1,6 +1,7 @@
-<manifest package="com.pgreader"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pgreader"
     android:versionCode="1"
-    android:versionName="1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -13,7 +14,7 @@
         <activity
             android:name=".ui.UnitListActivity"
             android:label="@string/title_unit_list" >
-             <meta-data
+            <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
         </activity>
@@ -32,6 +33,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.ResourceLoaderActivity"
+            android:label="@string/title_activity_resource_loader" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pgreader.ui.MainActivity" />
         </activity>
     </application>
 

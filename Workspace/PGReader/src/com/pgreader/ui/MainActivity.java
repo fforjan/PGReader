@@ -21,12 +21,22 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        final Button button = (Button) findViewById(R.id.unitBrowser);
+        Button button = (Button) findViewById(R.id.unitBrowser);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	// start the activity for display the unit browser
             	Intent unitListActivity = new Intent(v.getContext(), UnitListActivity.class);
                 startActivity(unitListActivity);
+            }
+        });
+        
+        button = (Button) findViewById(R.id.manageResources);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	// start the activity for managing resources
+            	Intent manageResourcesActivity = 
+            			new Intent(v.getContext(), ResourceLoaderActivity.class);
+                startActivity(manageResourcesActivity);
             }
         });
     }

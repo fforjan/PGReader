@@ -19,5 +19,6 @@
     <string name="title_activity_main">PGReader</string>
     <string name="manageResources">Manage Resources</string>
     <string name="unitBrowser">Unit Browser</string>
+    <string name="title_activity_resource_loader">Load resources</string>
 
 </resources>
