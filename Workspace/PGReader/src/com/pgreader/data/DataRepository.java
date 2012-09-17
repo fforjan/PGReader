@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.pgreader.data.map.Terrain;
+
 /**
  * data repository for reading legacy PG data.
  */
@@ -95,4 +97,23 @@ public final class DataRepository {
 		DataRepository.sFlags = flags;
 	}
 	
+	
+	/**
+	 * @return the sTerrain
+	 */
+	public static List<Terrain> getTerrain() {
+		return sTerrain;
+	}
+
+	/**
+	 * @param terrain the terrain to set
+	 */
+	public static void setTerrain(List<Terrain> terrain) {
+		DataRepository.sTerrain = terrain;
+	}
+
+	/**
+	 * Terrain list.
+	 */
+	private static List<Terrain> sTerrain;
 }

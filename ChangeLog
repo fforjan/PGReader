@@ -1,0 +1,129 @@
+Frederic Forjan <fforjan@free.fr>t2012-09-15
+
+o introduce weather        start    
+
+Frederic Forjan <fforjan@free.fr>t2012-09-15
+
+    remove unused import
+
+Frederic Forjan <fforjan@free.fr>t2012-09-15
+
+    add sound and correct progress bar
+
+Frederic Forjan <fforjan@free.fr>t2012-09-15
+
+    add french localisation
+
+Frederic Forjan <fforjan@free.fr>t2012-09-15
+
+he units        unit icon instead of text for    
+
+Frederic Forjan <fforjan@free.fr>t2012-09-15
+
+he detail        add flags icon for    
+
+Frederic Forjan <fforjan@free.fr>t2012-09-14
+
+    loading is now displaying a dialog message
+
+Frederic Forjan <fforjan@free.fr>t2012-09-14
+
+he resources are loaded on demande.           
+
+Frederic Forjan <fforjan@free.fr>t2012-09-14
+
+    add empty activity for managing resources
+
+Frederic Forjan <fforjan@free.fr>t2012-09-14
+
+he main menu        Introduce the main activity for displaying    
+
+Frederic Forjan <fforjan@free.fr>t2012-09-14
+
+    missing refactoring
+
+Frederic Forjan <fforjan@free.fr>t2012-09-14
+
+    Refactoring for class private for panzer general
+
+Frederic Forjan <fforjan@free.fr>t2012-09-14
+
+    Correct all warnings :)
+
+Frederic Forjan <fforjan@free.fr>t2012-09-14
+
+    no new feature but correct lot of lint/checkstyle issues
+
+Frederic Forjan <fforjan@free.fr>t2012-09-13
+
+    Update git ignore for android/eclipse
+
+Frederic Forjan <fforjan@free.fr>t2012-09-13
+
+    update readme, provide a LICENSE file
+
+Frederic Forjan <fforjan@free.fr>t2012-09-13
+
+    update git ignore file
+
+Frederic Forjan <fforjan@free.fr>t2012-09-13
+
+    Clean Workspace
+
+Frederic Forjan <fforjan@free.fr>t2012-09-13
+
+o enable reusing it for map        rename UnitView to PGSHpSingleView    
+
+Frederic Forjan <fforjan@free.fr>t2012-09-13
+
+    The unit icon is displayed on a purple background :)
+
+Frederic Forjan <fforjan@free.fr>t2012-09-12
+
+    An image is display… wrong rect…. see Opel 6700
+
+Frederic Forjan <fforjan@free.fr>t2012-09-12
+
+    first cut for shp reader
+
+Frederic Forjan <fforjan@free.fr>t2012-09-12
+
+he nation        add code for guessing    
+
+Frederic Forjan <fforjan@free.fr>t2012-09-12
+
+he unit database :), picture is missing  :(        We are able to read    
+
+Frederic Forjan <fforjan@free.fr>t2012-09-12
+
+able        Add a bit of padding when displaying unit info    
+
+Frederic Forjan <fforjan@free.fr>t2012-09-12
+
+    exclude bin folder
+
+Frederic Forjan <fforjan@free.fr>t2012-09-12
+
+    remove .metadata file
+
+Frederic Forjan <fforjan@free.fr>t2012-09-12
+
+    first implementation for unit description
+
+Frederic Forjan <fforjan@free.fr>t2012-09-12
+
+he metadata folder        update gitignore for    
+
+Frederic Forjan <fforjan@free.fr>t2012-09-10
+
+    Add Panzer General Data file
+    
+    from lgeneral web site
+
+Frederic Forjan <fforjan@free.fr>t2012-09-10
+
+o match Github.com file name        Change Readme    
+
+Frederic Forjan <fforjan@free.fr>t2012-09-10
+
+    Initial import with small description and contact point

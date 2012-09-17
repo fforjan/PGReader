@@ -177,6 +177,7 @@ public final class LegacyReader {
 	public static void loadData(Context context) {
 		
 		registerSound();
+		StaticTerrain.registerTerrain();
 		new LoadLegacyTask(context).execute();
 	}
 	
@@ -191,5 +192,4 @@ public final class LegacyReader {
 		SoundManager.registerSound(MoveType.HalfTracked, R.raw.tracked);
 		SoundManager.registerSound(MoveType.Wheeled, R.raw.wheeled);
 	}
-
 }

@@ -1,6 +1,8 @@
-package com.pgreader.data;
+package com.pgreader.data.map;
 
 import java.util.EnumSet;
+
+import com.pgreader.data.Ground;
 
 /**
  *
@@ -141,23 +143,23 @@ public enum Weather {
 	 * @param weather current weather
 	 * @return associated set
 	 */
-	public Terrain.TerrainSet getSet(Weather weather) {
+	public TerrainSet getSet(Weather weather) {
 		switch(weather) {
 			case FairDry:
 			case OverCastDry:
 			case RainingDry:
 			case SnowingDry:
-				return Terrain.TerrainSet.Regular;
+				return TerrainSet.Regular;
 			case FairMud:
 			case OverCastMud:
 			case RainingMud:
 			case SnowingMud:
-				return Terrain.TerrainSet.Rain;
+				return TerrainSet.Rain;
 			case FairIce:
 			case OverCastIce:
 			case RainingIce:
 			case SnowingIce:
-				return Terrain.TerrainSet.Snow;
+				return TerrainSet.Ice;
 			default:
 				throw new IllegalArgumentException();
 		}
