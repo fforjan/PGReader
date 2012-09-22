@@ -13,6 +13,11 @@ import com.pgreader.data.MoveType;
 public class Terrain {
 
 	/**
+	 * define difference between min and max for entrenchment.
+	 */
+	private static final int REGULARENTRENCHMENTMAX = 5;
+	
+	/**
 	 * terrain id.
 	 */
 	private String mId;
@@ -90,10 +95,14 @@ public class Terrain {
 	}
 
 	/**
+	 * This method is also setting the max entr.
+	 * So order MUST be min then max.
+	 * By default the max = min + REGULARENTRENCHMENTMAX
 	 * @param minEntr the minEntr to set
 	 */
 	public void setMinEntr(int minEntr) {
 		this.mMinEntr = minEntr;
+		this.mMaxEntr = minEntr + REGULARENTRENCHMENTMAX;
 	}
 
 	/**
