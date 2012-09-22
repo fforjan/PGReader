@@ -9,6 +9,10 @@ public  enum TerrainImpact {
 	 * river.
 	 */
 	River,
+	/** 
+	 * Swamp.
+	 */
+	Swamp,
 	/**
 	 * Infantry closed defense.
 	 */
