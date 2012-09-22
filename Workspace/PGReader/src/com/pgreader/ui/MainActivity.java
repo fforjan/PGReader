@@ -39,6 +39,16 @@ public class MainActivity extends Activity {
                 startActivity(manageResourcesActivity);
             }
         });
+        
+        button = (Button) findViewById(R.id.terrainBrowser);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	// start the activity for managing resources
+            	Intent browseTerrainActivity = 
+            			new Intent(v.getContext(), UnitListActivity.class);
+                startActivity(browseTerrainActivity);
+            }
+        });
     }
     
 

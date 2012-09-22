@@ -28,5 +28,6 @@
     <string name="loadingFlags">Loading flags…</string>
     <string name="askForResourceSet">Did you load a resource set ?</string>
     <string name="cannotFindUnits">Cannot find any units</string>
+    <string name="terrainBrowser">browse terrain</string>
 
 </resources>
