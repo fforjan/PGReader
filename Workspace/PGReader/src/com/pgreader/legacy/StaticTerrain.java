@@ -3,6 +3,8 @@ package com.pgreader.legacy;
 import java.util.EnumSet;
 import java.util.Vector;
 
+import com.pgreader.data.MoveCost;
+import com.pgreader.data.MoveType;
 import com.pgreader.data.map.Terrain;
 import com.pgreader.data.map.TerrainImpact;
 import com.pgreader.data.map.TerrainSet;
@@ -62,9 +64,32 @@ public final class StaticTerrain {
 		clear.setSpotCost(Weather.RainingIce, 2);
 		clear.setSpotCost(Weather.SnowingIce, 2);
 		
-		clear.setMoveCost(TerrainSet.Regular, "1121A1X1");
-		clear.setMoveCost(TerrainSet.Rain, "2331A1X2");
-		clear.setMoveCost(TerrainSet.Ice, "1221A1X2");
+		clear.setMoveCost(TerrainSet.Regular, MoveType.Tracked, MoveCost.One);
+		clear.setMoveCost(TerrainSet.Regular, MoveType.HalfTracked, MoveCost.One);
+		clear.setMoveCost(TerrainSet.Regular, MoveType.Wheeled, MoveCost.Two);
+		clear.setMoveCost(TerrainSet.Regular, MoveType.Leg, MoveCost.One);	
+		clear.setMoveCost(TerrainSet.Regular, MoveType.Towed, MoveCost.All);
+		clear.setMoveCost(TerrainSet.Regular, MoveType.Air, MoveCost.One);
+		clear.setMoveCost(TerrainSet.Regular, MoveType.Naval, MoveCost.Cant);
+		clear.setMoveCost(TerrainSet.Regular, MoveType.AllTerrain, MoveCost.One);
+				
+		clear.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.Two);
+		clear.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.Three);
+		clear.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.Three);
+		clear.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.One);	
+		clear.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		clear.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		clear.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		clear.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.Two);
+		
+		clear.setMoveCost(TerrainSet.Ice, MoveType.Tracked, MoveCost.One);
+		clear.setMoveCost(TerrainSet.Ice, MoveType.HalfTracked, MoveCost.Two);
+		clear.setMoveCost(TerrainSet.Ice, MoveType.Wheeled, MoveCost.Two);
+		clear.setMoveCost(TerrainSet.Ice, MoveType.Leg, MoveCost.One);	
+		clear.setMoveCost(TerrainSet.Ice, MoveType.Towed, MoveCost.All);
+		clear.setMoveCost(TerrainSet.Ice, MoveType.Air, MoveCost.One);
+		clear.setMoveCost(TerrainSet.Ice, MoveType.Naval, MoveCost.Cant);
+		clear.setMoveCost(TerrainSet.Ice, MoveType.AllTerrain, MoveCost.Two);
 		
 		clear.setFlag(TerrainSet.Regular, EnumSet.noneOf(TerrainImpact.class));
 		clear.setFlag(TerrainSet.Rain, EnumSet.noneOf(TerrainImpact.class));
@@ -98,9 +123,32 @@ public final class StaticTerrain {
 		road.setSpotCost(Weather.RainingIce, 2);
 		road.setSpotCost(Weather.SnowingIce, 2);
 		
-		road.setMoveCost(TerrainSet.Regular, "1111A1X1");
-		road.setMoveCost(TerrainSet.Rain, "1121A1X1");
-		road.setMoveCost(TerrainSet.Ice, "1121A1X1");
+		road.setMoveCost(TerrainSet.Regular, MoveType.Tracked, MoveCost.One);
+		road.setMoveCost(TerrainSet.Regular, MoveType.HalfTracked, MoveCost.One);
+		road.setMoveCost(TerrainSet.Regular, MoveType.Wheeled, MoveCost.One);
+		road.setMoveCost(TerrainSet.Regular, MoveType.Leg, MoveCost.One);	
+		road.setMoveCost(TerrainSet.Regular, MoveType.Towed, MoveCost.All);
+		road.setMoveCost(TerrainSet.Regular, MoveType.Air, MoveCost.One);
+		road.setMoveCost(TerrainSet.Regular, MoveType.Naval, MoveCost.Cant);
+		road.setMoveCost(TerrainSet.Regular, MoveType.AllTerrain, MoveCost.One);
+				
+		road.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.One);
+		road.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.One);
+		road.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.Two);
+		road.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.One);	
+		road.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		road.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		road.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		road.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.One);
+		
+		road.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.One);
+		road.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.One);
+		road.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.Two);
+		road.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.One);	
+		road.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		road.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		road.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		road.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.One);
 		
 		road.setFlag(TerrainSet.Regular, EnumSet.noneOf(TerrainImpact.class));
 		road.setFlag(TerrainSet.Rain, EnumSet.noneOf(TerrainImpact.class));
@@ -134,9 +182,32 @@ public final class StaticTerrain {
 		fields.setSpotCost(Weather.RainingIce, 2);
 		fields.setSpotCost(Weather.SnowingIce, 2);
 		
-		fields.setMoveCost(TerrainSet.Regular, "4AA2A1X3");
-		fields.setMoveCost(TerrainSet.Rain, "AAA2A1XA");
-		fields.setMoveCost(TerrainSet.Ice, "AAA2A1X3");
+		fields.setMoveCost(TerrainSet.Regular, MoveType.Tracked, MoveCost.Four);
+		fields.setMoveCost(TerrainSet.Regular, MoveType.HalfTracked, MoveCost.All);
+		fields.setMoveCost(TerrainSet.Regular, MoveType.Wheeled, MoveCost.All);
+		fields.setMoveCost(TerrainSet.Regular, MoveType.Leg, MoveCost.Two);	
+		fields.setMoveCost(TerrainSet.Regular, MoveType.Towed, MoveCost.All);
+		fields.setMoveCost(TerrainSet.Regular, MoveType.Air, MoveCost.One);
+		fields.setMoveCost(TerrainSet.Regular, MoveType.Naval, MoveCost.Cant);
+		fields.setMoveCost(TerrainSet.Regular, MoveType.AllTerrain, MoveCost.Three);
+				
+		fields.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.All);
+		fields.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.All);
+		fields.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.All);
+		fields.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.Two);	
+		fields.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		fields.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		fields.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		fields.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.All);
+		
+		fields.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.All);
+		fields.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.All);
+		fields.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.All);
+		fields.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.Two);	
+		fields.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		fields.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		fields.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		fields.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.Three);
 		
 		fields.setFlag(TerrainSet.Regular, EnumSet.noneOf(TerrainImpact.class));
 		fields.setFlag(TerrainSet.Rain, EnumSet.noneOf(TerrainImpact.class));
@@ -170,9 +241,32 @@ public final class StaticTerrain {
 		rough.setSpotCost(Weather.RainingIce, 2);
 		rough.setSpotCost(Weather.SnowingIce, 2);
 		
-		rough.setMoveCost(TerrainSet.Regular, "2242A1X3");
-		rough.setMoveCost(TerrainSet.Rain, "34A2A1XA");
-		rough.setMoveCost(TerrainSet.Ice, "23A3A1X3");
+		rough.setMoveCost(TerrainSet.Regular, MoveType.Tracked, MoveCost.Two);
+		rough.setMoveCost(TerrainSet.Regular, MoveType.HalfTracked, MoveCost.Two);
+		rough.setMoveCost(TerrainSet.Regular, MoveType.Wheeled, MoveCost.Four);
+		rough.setMoveCost(TerrainSet.Regular, MoveType.Leg, MoveCost.Two);	
+		rough.setMoveCost(TerrainSet.Regular, MoveType.Towed, MoveCost.All);
+		rough.setMoveCost(TerrainSet.Regular, MoveType.Air, MoveCost.One);
+		rough.setMoveCost(TerrainSet.Regular, MoveType.Naval, MoveCost.Cant);
+		rough.setMoveCost(TerrainSet.Regular, MoveType.AllTerrain, MoveCost.Three);
+				
+		rough.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.Three);
+		rough.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.Four);
+		rough.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.All);
+		rough.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.Two);	
+		rough.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		rough.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		rough.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		rough.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.All);
+		
+		rough.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.Two);
+		rough.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.Three);
+		rough.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.All);
+		rough.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.Three);	
+		rough.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		rough.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		rough.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		rough.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.Three);
 		
 		rough.setFlag(TerrainSet.Regular, EnumSet.noneOf(TerrainImpact.class));
 		rough.setFlag(TerrainSet.Rain, EnumSet.noneOf(TerrainImpact.class));
@@ -206,9 +300,32 @@ public final class StaticTerrain {
 		river.setSpotCost(Weather.RainingIce, 2);
 		river.setSpotCost(Weather.SnowingIce, 2);
 		
-		river.setMoveCost(TerrainSet.Regular, "AAAAA1XA");
-		river.setMoveCost(TerrainSet.Rain, "XXXAA1XX");
-		river.setMoveCost(TerrainSet.Ice, "2232A1X2");
+		river.setMoveCost(TerrainSet.Regular, MoveType.Tracked, MoveCost.All);
+		river.setMoveCost(TerrainSet.Regular, MoveType.HalfTracked, MoveCost.All);
+		river.setMoveCost(TerrainSet.Regular, MoveType.Wheeled, MoveCost.All);
+		river.setMoveCost(TerrainSet.Regular, MoveType.Leg, MoveCost.All);	
+		river.setMoveCost(TerrainSet.Regular, MoveType.Towed, MoveCost.All);
+		river.setMoveCost(TerrainSet.Regular, MoveType.Air, MoveCost.One);
+		river.setMoveCost(TerrainSet.Regular, MoveType.Naval, MoveCost.Cant);
+		river.setMoveCost(TerrainSet.Regular, MoveType.AllTerrain, MoveCost.All);
+				
+		river.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.Cant);
+		river.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.Cant);
+		river.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.Cant);
+		river.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.All);	
+		river.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		river.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		river.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		river.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.Cant);
+		
+		river.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.Two);
+		river.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.Two);
+		river.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.Three);
+		river.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.Two);	
+		river.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		river.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		river.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		river.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.Two);
 		
 		river.setFlag(TerrainSet.Regular, EnumSet.of(TerrainImpact.River));
 		river.setFlag(TerrainSet.Rain, EnumSet.of(TerrainImpact.River));
@@ -242,9 +359,32 @@ public final class StaticTerrain {
 		forest.setSpotCost(Weather.RainingIce, 2);
 		forest.setSpotCost(Weather.SnowingIce, 2);
 		
-		forest.setMoveCost(TerrainSet.Regular, "2232A1X3");
-		forest.setMoveCost(TerrainSet.Rain, "33A2A1X4");
-		forest.setMoveCost(TerrainSet.Ice, "22A2A1X4");
+		forest.setMoveCost(TerrainSet.Regular, MoveType.Tracked, MoveCost.Two);
+		forest.setMoveCost(TerrainSet.Regular, MoveType.HalfTracked, MoveCost.Two);
+		forest.setMoveCost(TerrainSet.Regular, MoveType.Wheeled, MoveCost.Three);
+		forest.setMoveCost(TerrainSet.Regular, MoveType.Leg, MoveCost.Two);	
+		forest.setMoveCost(TerrainSet.Regular, MoveType.Towed, MoveCost.All);
+		forest.setMoveCost(TerrainSet.Regular, MoveType.Air, MoveCost.One);
+		forest.setMoveCost(TerrainSet.Regular, MoveType.Naval, MoveCost.Cant);
+		forest.setMoveCost(TerrainSet.Regular, MoveType.AllTerrain, MoveCost.Three);
+				
+		forest.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.Three);
+		forest.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.Three);
+		forest.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.All);
+		forest.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.Two);	
+		forest.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		forest.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		forest.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		forest.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.Four);
+		
+		forest.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.Two);
+		forest.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.Two);
+		forest.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.All);
+		forest.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.Two);	
+		forest.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		forest.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		forest.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		forest.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.Two);
 		
 		forest.setFlag(TerrainSet.Regular, EnumSet.of(TerrainImpact.InfCloseDef));
 		forest.setFlag(TerrainSet.Rain, EnumSet.of(TerrainImpact.InfCloseDef));
@@ -278,9 +418,32 @@ public final class StaticTerrain {
 		fort.setSpotCost(Weather.RainingIce, 2);
 		fort.setSpotCost(Weather.SnowingIce, 2);
 		
-		fort.setMoveCost(TerrainSet.Regular, "1121A1X1");
-		fort.setMoveCost(TerrainSet.Rain, "2241A1X3");
-		fort.setMoveCost(TerrainSet.Ice, "1131A1X2");
+		fort.setMoveCost(TerrainSet.Regular, MoveType.Tracked, MoveCost.One);
+		fort.setMoveCost(TerrainSet.Regular, MoveType.HalfTracked, MoveCost.One);
+		fort.setMoveCost(TerrainSet.Regular, MoveType.Wheeled, MoveCost.Two);
+		fort.setMoveCost(TerrainSet.Regular, MoveType.Leg, MoveCost.One);	
+		fort.setMoveCost(TerrainSet.Regular, MoveType.Towed, MoveCost.All);
+		fort.setMoveCost(TerrainSet.Regular, MoveType.Air, MoveCost.One);
+		fort.setMoveCost(TerrainSet.Regular, MoveType.Naval, MoveCost.Cant);
+		fort.setMoveCost(TerrainSet.Regular, MoveType.AllTerrain, MoveCost.One);
+				
+		fort.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.Two);
+		fort.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.Two);
+		fort.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.Four);
+		fort.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.One);	
+		fort.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		fort.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		fort.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		fort.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.One);
+		
+		fort.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.Two);
+		fort.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.Two);
+		fort.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.Four);
+		fort.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.One);	
+		fort.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		fort.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		fort.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		fort.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.Three);
 		
 		fort.setFlag(TerrainSet.Regular, EnumSet.of(TerrainImpact.InfCloseDef));
 		fort.setFlag(TerrainSet.Rain, EnumSet.of(TerrainImpact.InfCloseDef));
@@ -314,9 +477,32 @@ public final class StaticTerrain {
 		airfield.setSpotCost(Weather.RainingIce, 2);
 		airfield.setSpotCost(Weather.SnowingIce, 2);
 		
-		airfield.setMoveCost(TerrainSet.Regular, "1111A1X1");
-		airfield.setMoveCost(TerrainSet.Rain, "1121A1X1");
-		airfield.setMoveCost(TerrainSet.Ice, "1121A1X1");
+		airfield.setMoveCost(TerrainSet.Regular, MoveType.Tracked, MoveCost.One);
+		airfield.setMoveCost(TerrainSet.Regular, MoveType.HalfTracked, MoveCost.One);
+		airfield.setMoveCost(TerrainSet.Regular, MoveType.Wheeled, MoveCost.One);
+		airfield.setMoveCost(TerrainSet.Regular, MoveType.Leg, MoveCost.One);	
+		airfield.setMoveCost(TerrainSet.Regular, MoveType.Towed, MoveCost.All);
+		airfield.setMoveCost(TerrainSet.Regular, MoveType.Air, MoveCost.One);
+		airfield.setMoveCost(TerrainSet.Regular, MoveType.Naval, MoveCost.Cant);
+		airfield.setMoveCost(TerrainSet.Regular, MoveType.AllTerrain, MoveCost.One);
+				
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.One);
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.One);
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.Two);
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.One);	
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.One);
+		
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.One);
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.One);
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.Two);
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.One);	
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		airfield.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.One);
 		
 		airfield.setFlag(TerrainSet.Regular, 
 				EnumSet.of(TerrainImpact.SupplyAir, TerrainImpact.SupplyGround));
@@ -353,9 +539,32 @@ public final class StaticTerrain {
 		town.setSpotCost(Weather.RainingIce, 2);
 		town.setSpotCost(Weather.SnowingIce, 2);
 		
-		town.setMoveCost(TerrainSet.Regular, "1111A1X1");
-		town.setMoveCost(TerrainSet.Rain, "1111A1X1");
-		town.setMoveCost(TerrainSet.Ice, "1121A1X1");
+		town.setMoveCost(TerrainSet.Regular, MoveType.Tracked, MoveCost.One);
+		town.setMoveCost(TerrainSet.Regular, MoveType.HalfTracked, MoveCost.One);
+		town.setMoveCost(TerrainSet.Regular, MoveType.Wheeled, MoveCost.One);
+		town.setMoveCost(TerrainSet.Regular, MoveType.Leg, MoveCost.One);	
+		town.setMoveCost(TerrainSet.Regular, MoveType.Towed, MoveCost.All);
+		town.setMoveCost(TerrainSet.Regular, MoveType.Air, MoveCost.One);
+		town.setMoveCost(TerrainSet.Regular, MoveType.Naval, MoveCost.Cant);
+		town.setMoveCost(TerrainSet.Regular, MoveType.AllTerrain, MoveCost.One);
+				
+		town.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.One);
+		town.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.One);
+		town.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.One);
+		town.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.One);	
+		town.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		town.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		town.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		town.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.One);
+		
+		town.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.One);
+		town.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.One);
+		town.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.Two);
+		town.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.One);	
+		town.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.All);
+		town.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		town.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.Cant);
+		town.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.One);
 		
 		town.setFlag(TerrainSet.Regular, 
 				EnumSet.of(TerrainImpact.InfCloseDef, TerrainImpact.SupplyGround));
@@ -392,9 +601,32 @@ public final class StaticTerrain {
 		ocean.setSpotCost(Weather.RainingIce, 2);
 		ocean.setSpotCost(Weather.SnowingIce, 2);
 		
-		ocean.setMoveCost(TerrainSet.Regular, "XXXXX11X");
-		ocean.setMoveCost(TerrainSet.Rain, "XXXXX11X");
-		ocean.setMoveCost(TerrainSet.Ice, "XXXXX11X");
+		ocean.setMoveCost(TerrainSet.Regular, MoveType.Tracked, MoveCost.Cant);
+		ocean.setMoveCost(TerrainSet.Regular, MoveType.HalfTracked, MoveCost.Cant);
+		ocean.setMoveCost(TerrainSet.Regular, MoveType.Wheeled, MoveCost.Cant);
+		ocean.setMoveCost(TerrainSet.Regular, MoveType.Leg, MoveCost.Cant);	
+		ocean.setMoveCost(TerrainSet.Regular, MoveType.Towed, MoveCost.Cant);
+		ocean.setMoveCost(TerrainSet.Regular, MoveType.Air, MoveCost.One);
+		ocean.setMoveCost(TerrainSet.Regular, MoveType.Naval, MoveCost.One);
+		ocean.setMoveCost(TerrainSet.Regular, MoveType.AllTerrain, MoveCost.Cant);
+				
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.Cant);
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.Cant);
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.Cant);
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.Cant);	
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.Cant);
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.One);
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.One);
+		
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.Tracked, MoveCost.Cant);
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.HalfTracked, MoveCost.Cant);
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.Wheeled, MoveCost.Cant);
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.Leg, MoveCost.Cant);	
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.Towed, MoveCost.Cant);
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.Air, MoveCost.One);
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.Naval, MoveCost.One);
+		ocean.setMoveCost(TerrainSet.Rain, MoveType.AllTerrain, MoveCost.Cant);
 		
 		ocean.setFlag(TerrainSet.Regular, 
 				EnumSet.of(TerrainImpact.InfCloseDef, TerrainImpact.SupplyGround));

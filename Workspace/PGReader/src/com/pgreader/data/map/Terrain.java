@@ -4,6 +4,9 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.pgreader.data.MoveCost;
+import com.pgreader.data.MoveType;
+
 /**
  * Terrain information.
  */
@@ -42,7 +45,8 @@ public class Terrain {
     /**
      * movement cost.
      */
-    private Map<TerrainSet, String> mMoveCosts = new HashMap<TerrainSet, String>();
+    private Map<TerrainSet, Map<MoveType, MoveCost>> mMoveCosts = 
+    		new HashMap<TerrainSet, Map<MoveType, MoveCost>>();
     
     /**
      * Flags per terrain set.
@@ -156,33 +160,38 @@ public class Terrain {
 	/**
 	 * @return the move costs
 	 */
-	public Map<TerrainSet, String> getMoveCosts() {
+	public Map<TerrainSet, Map<MoveType, MoveCost>> getMoveCosts() {
 		return mMoveCosts;
 	}
 	
 	/**
 	 * Return the move cost for a specific terrain set.
 	 * @param terrain targeted terrain
+	 * @param moveType requested moveType
 	 * @return move cost associated to the terrain set for this Terrain
 	 */
-	public String getMoveCost(TerrainSet terrain) {
-		return mMoveCosts.get(terrain);
+	public MoveCost getMoveCost(TerrainSet terrain, MoveType moveType) {
+		return mMoveCosts.get(terrain).get(moveType);
 	}
 	
 	/**
 	 * @param moveCosts the move costs to set
 	 */
-	public void setMoveCosts(Map<TerrainSet, String> moveCosts) {
+	public void setMoveCosts(Map<TerrainSet, Map<MoveType, MoveCost>> moveCosts) {
 		this.mMoveCosts = moveCosts;
 	}
 	
 	/**
 	 * Set the move cost for a specific terrain set.
 	 * @param terrain targeted terrain
+	 * @param moveType move type
 	 * @param moveCost move cost associated to the terrain set for this Terrain
 	 */
-	public void setMoveCost(TerrainSet terrain, String moveCost) {
-		mMoveCosts.put(terrain, moveCost);
+	public void setMoveCost(TerrainSet terrain, MoveType moveType, MoveCost moveCost) {
+		if (!mMoveCosts.containsKey(terrain)) {
+			mMoveCosts.put(terrain, new HashMap<MoveType, MoveCost>());
+		}
+		mMoveCosts.get(terrain).put(moveType, moveCost);
 	}
 
 	/**
