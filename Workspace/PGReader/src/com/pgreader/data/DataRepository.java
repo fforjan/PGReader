@@ -81,6 +81,7 @@ public final class DataRepository {
 		DataRepository.sTacIcons = null;
 		sUnits.clear();
 		sUnitsMap.clear();
+		sTerrains.clear();
 	}
 
 	/**
@@ -101,19 +102,34 @@ public final class DataRepository {
 	/**
 	 * @return the sTerrain
 	 */
-	public static List<Terrain> getTerrain() {
-		return sTerrain;
+	public static List<Terrain> getsTerrains() {
+		return sTerrains;
 	}
-
+	
 	/**
-	 * @param terrain the terrain to set
+	 * @return the sTerrain map
 	 */
-	public static void setTerrain(List<Terrain> terrain) {
-		DataRepository.sTerrain = terrain;
+	public static Map<String, Terrain> getsTerrainsMap() {
+		return sTerrainsMap;
 	}
-
+	
+	
 	/**
 	 * Terrain list.
 	 */
-	private static List<Terrain> sTerrain;
+	private static List<Terrain> sTerrains = new ArrayList<Terrain>();
+	
+	/**
+	 * map for accessing the terrain from its id.
+	 */
+	private static Map<String, Terrain> sTerrainsMap = new HashMap<String, Terrain>();
+	
+	/**
+	 * add a terrain into our terrain list.
+	 * @param terrain terrain to add
+	 */
+	public static void addTerrain(Terrain terrain) {
+		sTerrains.add(terrain);
+		sTerrainsMap.put(terrain.getId(), terrain);
+	}
 }

@@ -14,20 +14,21 @@
         android:layout_gravity="center"
         android:text="@string/manageResources" />
     
-    <Button
+    <ImageButton
         android:id="@+id/terrainBrowser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/unitBrowser"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:text="@string/terrainBrowser" />
+        android:contentDescription="@string/terrainBrowser" 
+        android:src="@drawable/terrain" />
 
     <ImageButton
         android:id="@+id/unitBrowser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/terrainBrowser"
         android:layout_gravity="center"
         android:contentDescription="@string/unitBrowser"
         android:src="@drawable/soldier" />

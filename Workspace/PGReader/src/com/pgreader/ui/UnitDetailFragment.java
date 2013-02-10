@@ -36,7 +36,7 @@ public class UnitDetailFragment extends Fragment {
      * @return the new view
      */
     private IconsResourceSingleView getIconView(View rootView, int id) {
-    		        
+    		         
         return ((IconsResourceSingleView) rootView.findViewById(id));
     }
 

@@ -3,6 +3,7 @@ package com.pgreader.legacy;
 import java.util.EnumSet;
 import java.util.Vector;
 
+import com.pgreader.data.DataRepository;
 import com.pgreader.data.MoveCost;
 import com.pgreader.data.MoveType;
 import com.pgreader.data.map.Terrain;
@@ -49,23 +50,22 @@ public final class StaticTerrain {
 	 * Terrain definition is hard coded at the moment.
 	 */
 	static void registerTerrain() {
-		Vector<Terrain> terrains = new Vector<Terrain>();
 		
-		terrains.add(getClear());
-		terrains.add(getRoad());
-		terrains.add(getFields());
-		terrains.add(getRough());
-		terrains.add(getRiver());
-		terrains.add(getForest());
-		terrains.add(getFortification());
-		terrains.add(getAirfield());
-		terrains.add(getTown());
-		terrains.add(getMountain());		
-		terrains.add(getOcean());
-		terrains.add(getSwamp());
-		terrains.add(getDesert());
-		terrains.add(getRoughDesert());
-		terrains.add(getHarbor());
+		DataRepository.addTerrain(getClear());
+		DataRepository.addTerrain(getRoad());
+		DataRepository.addTerrain(getFields());
+		DataRepository.addTerrain(getRough());
+		DataRepository.addTerrain(getRiver());
+		DataRepository.addTerrain(getForest());
+		DataRepository.addTerrain(getFortification());
+		DataRepository.addTerrain(getAirfield());
+		DataRepository.addTerrain(getTown());
+		DataRepository.addTerrain(getMountain());		
+		DataRepository.addTerrain(getOcean());
+		DataRepository.addTerrain(getSwamp());
+		DataRepository.addTerrain(getDesert());
+		DataRepository.addTerrain(getRoughDesert());
+		DataRepository.addTerrain(getHarbor());
 	}
 
 	/**

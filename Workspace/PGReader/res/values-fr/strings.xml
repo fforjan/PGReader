@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">PGReader</string>
     <string name="title_unit_detail">Detail de l\'unite</string>
     <string name="title_unit_list">Unites</string>
     <string name="attackAir">Attaque aerienne</string>
@@ -13,6 +14,7 @@
     <string name="moveType">type de deplacement</string>
     <string name="nation">Nation</string>
     <string name="menu_settings">Configuration</string>
+    <string name="title_activity_main">PGReader</string>
     <string name="manageResources">Gerer les Resources</string>
     <string name="unitBrowser">Explorateur d\'unite</string>
     <string name="title_activity_resource_loader">Charger des resources</string>
@@ -26,4 +28,8 @@
     <string name="loadingFlags">Chargement des drapeaux…</string>
     <string name="askForResourceSet">Avez-vous charger des resources ?</string>
 	<string name="cannotFindUnits">Impossible de trouver une unite</string>
+	<string name="terrainBrowser">Explorateur de terrain</string>
+    <string name="title_terrain_detail">Detail du terrain</string>
+    <string name="title_terrain_list">Terrains</string>
+    <string name="name">Nom</string>
 </resources>

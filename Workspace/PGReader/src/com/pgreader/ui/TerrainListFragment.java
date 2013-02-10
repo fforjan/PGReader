@@ -1,7 +1,6 @@
 package com.pgreader.ui;
 
 import com.pgreader.data.DataRepository;
-import com.pgreader.data.UnitEntry;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,51 +10,54 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /**
- * Display the list of unit.
+ * Terrain list fragment class.
  */
-public class UnitListFragment extends ListFragment {
+public class TerrainListFragment extends ListFragment {
 
 	/**
-	 * persist id for the mActivatedPosition field.
+	 * persisted property name.
 	 */
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
     /**
-     * current callback.
+     * callback when terrain is selected.
      */
     private Callbacks mCallbacks = sDummyCallbacks;
     
     /**
-     * Position of the current selection is persisted through this member.
+     * current activated item.
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
     /**
-     * define the call backs interface.
+     * class back when an item is selected.
      */
     public interface Callbacks {
+
     	/**
-    	 * called when a new item is selected.
-    	 * @param id id of the selected item, null if there is no selection.
+    	 * called when a terrain is selected by the user in the list.
+    	 * @param id terrain id
     	 */
-        void onItemSelected(String id);
+        void onTerrainSelected(String id);
     }
 
     /**
-     * Dummy call back when resetting the callback.
+     * default callback.
      */
     private static Callbacks sDummyCallbacks = new Callbacks() {
-		public void onItemSelected(String id) {
-		}
+       
+        public void onTerrainSelected(String id) {
+        }
     };
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setListAdapter(new ArrayAdapter<UnitEntry>(getActivity(),
+        setListAdapter(new ArrayAdapter<com.pgreader.data.map.Terrain>(getActivity(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                DataRepository.getsUnits()));
+                DataRepository.getsTerrains()));
     }
 
     @Override
@@ -86,7 +88,7 @@ public class UnitListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
-        mCallbacks.onItemSelected(DataRepository.getsUnits().get(position).getName());
+        mCallbacks.onTerrainSelected(DataRepository.getsTerrains().get(position).getId());
     }
 
     @Override
@@ -98,18 +100,18 @@ public class UnitListFragment extends ListFragment {
     }
 
     /**
-     * configure to active on click or not.
-     * @param activateOnItemClick if true, a click will select activate an object
+     * set the current mode : selection on item click or not.
+     * @param activateOnItemClick if true, the user is able to select an terrain.
      */
-    public void setActivateOnItemClick(boolean activateOnItemClick) { 
+    public void setActivateOnItemClick(boolean activateOnItemClick) {
         getListView().setChoiceMode(activateOnItemClick
                 ? ListView.CHOICE_MODE_SINGLE
                 : ListView.CHOICE_MODE_NONE);
     }
 
     /**
-     * update the current item.
-     * @param position item position. 
+     * set the activated position for the list.
+     * @param position position 
      */
     public void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {

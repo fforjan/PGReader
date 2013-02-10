@@ -7,8 +7,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
-
 
 /**
  * our main activity.
@@ -30,7 +28,7 @@ public class MainActivity extends Activity {
             }
         });
         
-        button = (Button) findViewById(R.id.manageResources);
+        button = (View) findViewById(R.id.manageResources);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	// start the activity for managing resources
@@ -40,12 +38,12 @@ public class MainActivity extends Activity {
             }
         });
         
-        button = (Button) findViewById(R.id.terrainBrowser);
+        button = (View) findViewById(R.id.terrainBrowser);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	// start the activity for managing resources
             	Intent browseTerrainActivity = 
-            			new Intent(v.getContext(), UnitListActivity.class);
+            			new Intent(v.getContext(), TerrainListActivity.class);
                 startActivity(browseTerrainActivity);
             }
         });
